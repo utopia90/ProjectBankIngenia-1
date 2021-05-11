@@ -1,11 +1,13 @@
 package com.ingenia.projectbank.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
-
 @Entity
-@Table(name = "categoria")
-public class Categoria {
+@Table(name = "movement")
+public class Movement {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

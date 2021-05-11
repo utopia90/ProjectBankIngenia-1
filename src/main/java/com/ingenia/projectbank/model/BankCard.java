@@ -1,12 +1,10 @@
 package com.ingenia.projectbank.model;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "movimiento")
-public class Movimiento {
+@Table(name = "bankcard")
+public class BankCard {
 
     @Id
     @Column(name = "id")

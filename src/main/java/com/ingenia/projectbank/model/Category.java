@@ -2,10 +2,10 @@ package com.ingenia.projectbank.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "tarjeta")
-public class Tarjeta {
 
+@Entity
+@Table(name = "category")
+public class Category {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
