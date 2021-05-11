@@ -1,5 +1,6 @@
 package com.ingenia.projectbank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Account {
 
     @ApiModelProperty("Clave usuario tipo User")
     @ManyToMany(mappedBy="users", cascade = {CascadeType.PERSIST})
+    @JsonIgnoreProperties("accounts")
     private List<User> users = new ArrayList<>();
 
     @ApiModelProperty("Clave movimiento tipo Movement")
