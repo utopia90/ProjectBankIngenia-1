@@ -26,12 +26,12 @@ public class MovementServiceImpl  implements MovementService {
     }
 
     @Override
-    public Movement createAccount(Movement movement) {
+    public Movement createMovement(Movement movement) {
         return repository.save(movement);
     }
 
     @Override
-    public Movement updateAccount(Movement movement) {
+    public Movement updateMovement(Movement movement) {
         if(movement.getId()!=null)repository.save(movement);
         return null;
     }

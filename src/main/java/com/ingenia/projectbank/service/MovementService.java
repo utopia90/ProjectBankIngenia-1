@@ -12,9 +12,9 @@ public interface MovementService {
 
     Optional<Movement> findOneMovementById(Long id);
 
-    Movement createAccount(Movement movement);
+    Movement createMovement(Movement movement);
 
-    Movement updateAccount(Movement movement);
+    Movement updateMovement(Movement movement);
 
     void deleteOneMovementById(Long id);
 
