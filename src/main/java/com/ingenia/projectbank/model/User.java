@@ -23,6 +23,7 @@ public class User {
     private String surname;
 
     @ApiModelProperty("Clave email tipo String")
+    @Column(unique = true)
     private String email;
 
     @ApiModelProperty("Clave password tipo String")

@@ -34,22 +34,26 @@ public class Movement {
     @ApiModelProperty("Clave cuenta tipo Account")
     @JoinColumn(name = "id_account")
     private Account account;
-
-    @ManyToOne()
+//TODO---------------------------------------
+    /*@ManyToOne()
     @ApiModelProperty("Clave categoria tipo Category")
     @JoinColumn(name = "id_category")
-    private Category category;
+    private Category category;*/
+//TODO---------------------------------------
+    @ApiModelProperty("Clave tipo categoría tipo Enum")
+    @Enumerated(EnumType.STRING)
+    private CategoryType categoryType;
 
     public Movement() {
     }
 
-    public Movement(OperationType operationType, PaymentType paymentType, Date date, Double quantity, Account account, Category category) {
+    public Movement(OperationType operationType, PaymentType paymentType, Date date, Double quantity, Account account, CategoryType categoryType) {
         this.operationType = operationType;
         this.paymentType = paymentType;
         this.date = date;
         this.quantity = quantity;
         this.account = account;
-        this.category = category;
+        this.categoryType = categoryType;
     }
 
     public Long getId() {
@@ -100,24 +104,11 @@ public class Movement {
         this.account = account;
     }
 
-    public Category getCategory() {
-        return category;
+    public CategoryType getCategoryType() {
+        return categoryType;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "Movement{" +
-                "id=" + id +
-                ", operationType=" + operationType +
-                ", paymentType=" + paymentType +
-                ", date=" + date +
-                ", quantity=" + quantity +
-                ", account=" + account +
-                ", category=" + category +
-                '}';
+    public void setCategoryType(CategoryType categoryType) {
+        this.categoryType = categoryType;
     }
 }
