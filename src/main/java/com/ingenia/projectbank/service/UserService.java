@@ -20,6 +20,10 @@ public interface UserService {
 
     User findUserByEmail(String email);
 
-    Boolean findByEmailAndPassword(String email , String password);
+    User findByEmailAndPassword(String email , String password);
+
+    Boolean existsByEmailAndPassword(String email , String password);
+
+
 
 }
