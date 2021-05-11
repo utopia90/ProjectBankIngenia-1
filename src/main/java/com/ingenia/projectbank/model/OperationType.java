@@ -1,4 +1,5 @@
 package com.ingenia.projectbank.model;
 
-public enum CategoryMovement {
+public enum OperationType {
+    SUM, REST
 }
