@@ -19,8 +19,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Autowired
-    UserDao userDao;
 
     @Override
     public List<User> findAllUsers() {

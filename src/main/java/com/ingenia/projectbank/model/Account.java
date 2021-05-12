@@ -35,6 +35,7 @@ public class Account {
 
     @ApiModelProperty("Clave Tarjeta tipo Card")
     @OneToMany(mappedBy = "account", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("account")
     private List<BankCard> cards = new ArrayList<>();
 
 
