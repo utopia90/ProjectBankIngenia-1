@@ -1,7 +1,6 @@
 package com.ingenia.projectbank.controller;
 
-import com.ingenia.projectbank.model.BankCard;
-import com.ingenia.projectbank.model.Movement;
+import com.ingenia.projectbank.model.*;
 import com.ingenia.projectbank.service.BankCardService;
 import com.ingenia.projectbank.service.MovementService;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,12 +33,27 @@ public class MovementController {
      */
     @GetMapping("/movements")
     @ApiOperation(value = "encuentra todas las Movimientos ")
-    public List<Movement> findAllMovements(){
-        log.debug("Rest request all Movements");
+    public List<Movement> findAllMovements(@RequestParam(name = "firstDate", required = false) Date firstDate,
+                                           @RequestParam(name = "finishDate", required = false) Date finishDate,
+                                           @RequestParam(name = "operation", required = false) OperationType operation,
+                                           @RequestParam(name = "category", required = false) CategoryType category,
+                                           @RequestParam(name = "payment", required = false) PaymentType payment){
+        if(operation!=null){
+            log.debug("Rest request for movements filter by operation");
+            return movementService.findMovementsByOperation(operation);
+        }else if(category!=null){
+            log.debug("Rest request for movements filter by category");
+            return movementService.findMovementsByCategory(category);
+        }else if(payment!=null){
+            log.debug("Rest request for movements filter by Payment");
+            return movementService.findMovementsByPayment(payment);
+        } else if(firstDate!=null&&finishDate!=null){
+            log.debug("Rest request Movements filter by initDate and finisDate ");
+            return movementService.findMovementsInterval(firstDate,finishDate);
+        }
+        log.debug("Rest request for Date  Movements");
         return movementService.findAllMovements();
     }
-
-
 
     /**
      *method return One Movement for ID
