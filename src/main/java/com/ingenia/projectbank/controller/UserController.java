@@ -29,7 +29,10 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+    /**
+     * method return all users
+     * @return List<User>
+     */
     @GetMapping("/users")
     @ApiOperation(value = "encuentra todos los usuarios ")
     public List<User> findAllUsers() {
