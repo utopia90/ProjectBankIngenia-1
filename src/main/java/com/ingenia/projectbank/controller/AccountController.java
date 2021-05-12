@@ -176,7 +176,7 @@ public class AccountController {
     @GetMapping("/account-user")
     @ApiOperation(value = "retorna  una/s Cuenta Bancaria por usuario")
     public ResponseEntity<List<Account>> getAccountByUser(@ApiParam("Objeto user a consultar") @RequestBody User user) {
-        log.debug("Rest request current salary in Account by user");
+        log.debug("Rest request current Account by user"+user);
         List<Account> accountsOpt = accountService.findAccountsByUser(user);
         if (accountsOpt != null) {
             return ResponseEntity.ok().body(accountsOpt);

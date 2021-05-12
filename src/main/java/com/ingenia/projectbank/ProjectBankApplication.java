@@ -2,6 +2,7 @@ package com.ingenia.projectbank;
 
 import com.ingenia.projectbank.model.*;
 import com.ingenia.projectbank.service.AccountService;
+import com.ingenia.projectbank.service.BankCardService;
 import com.ingenia.projectbank.service.MovementService;
 import com.ingenia.projectbank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class ProjectBankApplication implements CommandLineRunner {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	BankCardService bankCardService;
 
 	@Autowired
 	PasswordEncoder encoder;
@@ -55,6 +59,9 @@ public class ProjectBankApplication implements CommandLineRunner {
 		User salvi = new User("salvi", "Lopez", "salvilopezpruebas@gmail.com", encoder.encode("salvi"));
 
 
+		BankCard bankCard1 = new BankCard("392489234898492", "221", Instant.now());
+		BankCard bankCard2 = new BankCard("1239123939q9q39", "114", Instant.now());
+
 
 		account1.addMovimiento(movement1);
 		account1.addMovimiento(movement2);
@@ -79,12 +86,20 @@ public class ProjectBankApplication implements CommandLineRunner {
 		account1.getUsers().add(user1);
 		account2.getUsers().add(user2);
 
+		account1.getCards().add(bankCard1);
+		account2.getCards().add(bankCard2);
+
+		bankCard1.setAccount(account1);
+		bankCard2.setAccount(account2);
+
 
 		accountService.createAccount(account1);
 		accountService.createAccount(account2);
 		userService.createUser(salvi);
 		userService.createUser(user1);
 		userService.createUser(user2);
+		bankCardService.createBankCard(bankCard1);
+		bankCardService.createBankCard(bankCard2);
 
 
 

@@ -1,7 +1,9 @@
 package com.ingenia.projectbank.controller;
 
 
+import com.ingenia.projectbank.model.Account;
 import com.ingenia.projectbank.model.BankCard;
+import com.ingenia.projectbank.model.User;
 import com.ingenia.projectbank.service.BankCardService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -54,6 +56,38 @@ public class BankCardController {
             return ResponseEntity.ok().body(bankCardOpt.get());
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    /**
+     *method return all bankcards By User
+     * @param user
+     * @return
+     */
+    @GetMapping("/bankcard-user")
+    @ApiOperation(value = "encuentrar tarjetas bancarias por usuario")
+    public ResponseEntity <List<BankCard>> findBankCardsByUser(@ApiParam("Objeto User a consultar")@RequestBody User user) {
+        log.debug("Rest request  Bank Cards of user: "+ user);
+        List<BankCard> bankCardsOpt = bankCardService.findBankCardsByUser(user);
+        if (bankCardsOpt != null) {
+            return ResponseEntity.ok().body(bankCardsOpt);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    /**
+     *method return all bankcards By Account
+     * @param account
+     * @return
+     */
+    @GetMapping("/bankcard-account")
+    @ApiOperation(value = "encuentrar tarjetas bancarias por cuenta")
+    public ResponseEntity <List<BankCard>> findBankCardsByAccount(@ApiParam("Objeto Account a consultar")@RequestBody Account account) {
+        log.debug("Rest request  Bank Cards of account: "+ account);
+        List<BankCard> bankCardsOpt = bankCardService.findBankCardsByAccount(account);
+        if (bankCardsOpt != null) {
+            return ResponseEntity.ok().body(bankCardsOpt);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     /**
      * create bankCard

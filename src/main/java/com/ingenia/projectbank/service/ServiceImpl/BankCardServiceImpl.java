@@ -1,6 +1,9 @@
 package com.ingenia.projectbank.service.ServiceImpl;
 
+import com.ingenia.projectbank.dao.BankCardDao;
+import com.ingenia.projectbank.model.Account;
 import com.ingenia.projectbank.model.BankCard;
+import com.ingenia.projectbank.model.User;
 import com.ingenia.projectbank.repository.BankCardRepository;
 import com.ingenia.projectbank.service.BankCardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,9 @@ public class BankCardServiceImpl implements BankCardService {
     @Autowired
     BankCardRepository repository;
 
+    @Autowired
+    BankCardDao bankCardDao;
+
     @Override
     public List<BankCard> findAllBankCards() {
         return repository.findAll();
@@ -21,8 +27,8 @@ public class BankCardServiceImpl implements BankCardService {
 
     @Override
     public Optional<BankCard> findOneBankCardById(Long id) {
-        if(id!=null)repository.findById(id);
-        return Optional.empty();
+        if(id!=null) return repository.findById(id);
+        return null;
     }
 
     @Override
@@ -32,7 +38,7 @@ public class BankCardServiceImpl implements BankCardService {
 
     @Override
     public BankCard updateBankCard(BankCard bankCard) {
-        if(bankCard.getId()!=null)repository.save(bankCard);
+        if(bankCard.getId()!=null)return repository.save(bankCard);
         return null;
     }
 
@@ -44,5 +50,15 @@ public class BankCardServiceImpl implements BankCardService {
     @Override
     public void deleteAllBankCards() {
         repository.deleteAll();
+    }
+
+    @Override
+    public List<BankCard> findBankCardsByUser(User user) {
+        return bankCardDao.findBankCardsByUser(user);
+    }
+
+    @Override
+    public List<BankCard> findBankCardsByAccount(Account account) {
+        return bankCardDao.findBankCardsByAccount(account);
     }
 }

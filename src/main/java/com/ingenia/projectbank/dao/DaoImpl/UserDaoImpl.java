@@ -8,8 +8,5 @@ import java.util.Optional;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-    @Override
-    public Optional<User> findOneUserById(Long id) {
-        return Optional.empty();
-    }
+
 }

@@ -35,11 +35,10 @@ public class BankCard {
     public BankCard() {
     }
 
-    public BankCard(String pan, String ccv, Instant expirationDate, Account account) {
+    public BankCard(String pan, String ccv, Instant expirationDate) {
         this.pan = pan;
         this.ccv = ccv;
         this.expirationDate = expirationDate;
-        this.account = account;
     }
 
     public Long getId() {

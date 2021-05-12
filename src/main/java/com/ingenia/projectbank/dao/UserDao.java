@@ -5,5 +5,4 @@ import com.ingenia.projectbank.model.User;
 import java.util.Optional;
 
 public interface UserDao {
-    Optional<User> findOneUserById(Long id);
 }
