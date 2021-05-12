@@ -17,10 +17,11 @@ public class MovementDaoImpl implements MovementDao {
 
     @Override
     public List<Movement> findMovementsInterval(Date firstDay, Date lastDay) {
-    /*    if (firstDay != null || lastDay != null) {
-            Query query = manager.createQuery("SELECT * FROM Movement" + "WHERE date BETWEEN "+firstDay+" AND "+lastDay);
+      if (firstDay != null || lastDay != null) {
+        //  Query query = manager.createQuery("SELECT e FROM Movement AS e WHERE e.date BE");
+           Query query = manager.createQuery("SELECT * FROM Movement" + "WHERE date BETWEEN "+firstDay+" AND "+lastDay);
            return query.getResultList();
-        }*/
+        }
         return new ArrayList<>();
     }
     }

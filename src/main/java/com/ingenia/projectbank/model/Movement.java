@@ -111,4 +111,5 @@ public class Movement {
     public void setCategoryType(CategoryType categoryType) {
         this.categoryType = categoryType;
     }
+
 }

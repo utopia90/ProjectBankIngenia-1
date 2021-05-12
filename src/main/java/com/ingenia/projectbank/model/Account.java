@@ -91,6 +91,16 @@ public class Account {
         this.cards = cards;
     }
 
+    public void addMovimiento(Movement movement){
+        if(movement.getOperationType()==OperationType.REST){
+                this.currentBalance=this.currentBalance-movement.getQuantity();
+        }else if(movement.getOperationType()==OperationType.SUM){
+            this.currentBalance=this.currentBalance+movement.getQuantity();
+        }
+        this.getMovements().add(movement);
+
+    }
+
     @Override
     public String toString() {
         return "Account{" +
