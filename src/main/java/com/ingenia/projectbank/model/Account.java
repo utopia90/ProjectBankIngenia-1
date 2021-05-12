@@ -23,7 +23,7 @@ public class Account {
     private Double currentBalance;
 
     @ApiModelProperty("Clave usuario tipo User")
-    @ManyToMany(mappedBy="accounts", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy="accounts", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
     @ApiModelProperty("Clave movimiento tipo Movement")

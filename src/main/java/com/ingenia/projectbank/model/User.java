@@ -37,19 +37,18 @@ public class User {
             joinColumns = {@JoinColumn(name="users_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="accounts_id", referencedColumnName = "id")}
     )
-    @JsonIgnoreProperties("users")
+    //@JsonIgnoreProperties("accounts")
     private List<Account> accounts = new ArrayList<>();
 
 
     public User() {
     }
 
-    public User(String name, String surname, String email, String password, List<Account> accounts) {
+    public User(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.accounts = accounts;
     }
 
     public Long getId() {
