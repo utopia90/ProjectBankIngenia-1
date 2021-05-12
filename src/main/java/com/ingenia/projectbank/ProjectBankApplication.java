@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 
 @SpringBootApplication
@@ -50,13 +51,13 @@ public class ProjectBankApplication implements CommandLineRunner {
 		Account account1 = new Account("es2452645435454",3000.0);
 		Account account2 = new Account("es2452645435455",4000.0);
 
-		Movement movement1=new Movement(OperationType.REST, PaymentType.ACCOUNT,new Date(),320.0,account1, CategoryType.UTILITIES);
-		Movement movement2=new Movement(OperationType.REST, PaymentType.CARD,fechaConHora1,100.0,account1, CategoryType.CLOTHES);
-		Movement movement3=new Movement(OperationType.REST, PaymentType.CARD,fechaConHora2,20.0,account1, CategoryType.FUEL);
-		Movement movement4=new Movement(OperationType.REST, PaymentType.ACCOUNT,fechaConHora3,40.0,account1, CategoryType.RESTAURANTS);
-		Movement movement5=new Movement(OperationType.REST, PaymentType.CARD,fechaConHora4,400.0,account1, CategoryType.UTILITIES);
-		Movement movement6=new Movement(OperationType.SUM, PaymentType.ACCOUNT,fechaConHora5,1200.0,account1, CategoryType.PAID);
-		Movement movement7=new Movement(OperationType.SUM, PaymentType.ACCOUNT,fechaConHora6,1200.0,account1, CategoryType.PAID);
+		Movement movement1=new Movement(OperationType.REST, PaymentType.ACCOUNT, Instant.now(),320.0,account1, CategoryType.UTILITIES);
+		Movement movement2=new Movement(OperationType.REST, PaymentType.CARD,Instant.parse("2018-11-30T18:35:24.00Z"),100.0,account1, CategoryType.CLOTHES);
+		Movement movement3=new Movement(OperationType.REST, PaymentType.CARD,Instant.parse("2018-11-30T18:35:24.00Z"),20.0,account1, CategoryType.FUEL);
+		Movement movement4=new Movement(OperationType.REST, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),40.0,account1, CategoryType.RESTAURANTS);
+		Movement movement5=new Movement(OperationType.REST, PaymentType.CARD,Instant.parse("2018-11-30T18:35:24.00Z"),400.0,account1, CategoryType.UTILITIES);
+		Movement movement6=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
+		Movement movement7=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
 
 		User user1 = new User("Borja", "Díaz", "borja@diaz", "1234");
 		User user2 = new User("Elena", "Fernández", "elena@fernandez", "1234");
