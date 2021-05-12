@@ -44,6 +44,7 @@ public class Movement {
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
 
+
     public Movement() {
     }
 

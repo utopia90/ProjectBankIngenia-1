@@ -43,7 +43,6 @@ public class ProjectBankApplication implements CommandLineRunner {
 		Date fechaConHora5 = sdf.parse(fecha5);
 		Date fechaConHora6 = sdf.parse(fecha6);
 
-
 		Account account1 = new Account("es2452645435454",3000.0);
 		Movement movement1=new Movement(OperationType.REST, PaymentType.ACCOUNT,new Date(),320.0,account1, CategoryType.UTILITIES);
 		Movement movement2=new Movement(OperationType.REST, PaymentType.CARD,fechaConHora1,100.0,account1, CategoryType.CLOTHES);
@@ -52,8 +51,6 @@ public class ProjectBankApplication implements CommandLineRunner {
 		Movement movement5=new Movement(OperationType.REST, PaymentType.CARD,fechaConHora4,400.0,account1, CategoryType.UTILITIES);
 		Movement movement6=new Movement(OperationType.SUM, PaymentType.ACCOUNT,fechaConHora5,1200.0,account1, CategoryType.PAID);
 		Movement movement7=new Movement(OperationType.SUM, PaymentType.ACCOUNT,fechaConHora6,1200.0,account1, CategoryType.PAID);
-
-
 
 		account1.addMovimiento(movement1);
 		account1.addMovimiento(movement2);
@@ -69,7 +66,6 @@ public class ProjectBankApplication implements CommandLineRunner {
 		movement5.setAccount(account1);
 		movement6.setAccount(account1);
 		movement7.setAccount(account1);
-
 		accountService.createAccount(account1);
 
 
