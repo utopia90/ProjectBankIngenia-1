@@ -34,8 +34,8 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "users_accounts",
-            joinColumns = {@JoinColumn(name="accounts_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name="users_id", referencedColumnName = "id")}
+            joinColumns = {@JoinColumn(name="users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="accounts_id", referencedColumnName = "id")}
     )
     @JsonIgnoreProperties("users")
     private List<Account> accounts = new ArrayList<>();
