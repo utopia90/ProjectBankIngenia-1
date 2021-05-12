@@ -38,18 +38,6 @@ public class ProjectBankApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-		String fecha1 = "2021-01-19 15:03:23";
-		String fecha2 = "2021-02-20 15:03:23";
-		String fecha3 = "2021-03-05 15:03:23";
-		String fecha4 = "2020-04-06 15:03:23";
-		String fecha5 = "2020-03-01 15:03:23";
-		String fecha6 = "2020-04-01 15:03:23";
-		Date fechaConHora1 = sdf.parse(fecha1);
-		Date fechaConHora2 = sdf.parse(fecha2);
-		Date fechaConHora3 = sdf.parse(fecha3);
-		Date fechaConHora4 = sdf.parse(fecha4);
-		Date fechaConHora5 = sdf.parse(fecha5);
-		Date fechaConHora6 = sdf.parse(fecha6);
 
 		Account account1 = new Account("es2452645435454",3000.0);
 		Account account2 = new Account("es2452645435455",4000.0);
