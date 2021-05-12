@@ -23,7 +23,7 @@ public class Account {
     private Double currentBalance;
 
     @ApiModelProperty("Clave usuario tipo User")
-    @ManyToMany(mappedBy=" ", cascade = {CascadeType.PERSIST})
+    @ManyToMany(mappedBy="accounts", cascade = {CascadeType.PERSIST})
     @JsonIgnoreProperties("accounts")
     private List<User> users = new ArrayList<>();
 
