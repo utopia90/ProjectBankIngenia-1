@@ -23,8 +23,7 @@ public class Account {
     private Double currentBalance;
 
     @ApiModelProperty("Clave usuario tipo User")
-    @ManyToMany(mappedBy="accounts", cascade = {CascadeType.PERSIST})
-    @JsonIgnoreProperties("accounts")
+    @ManyToMany(mappedBy="accounts", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
     @ApiModelProperty("Clave movimiento tipo Movement")
@@ -38,12 +37,9 @@ public class Account {
     public Account() {
     }
 
-    public Account(String iban, Double currentBalance, List<User> users, List<Movement> movements, List<BankCard> cards) {
+    public Account(String iban, Double currentBalance) {
         this.iban = iban;
         this.currentBalance = currentBalance;
-        this.users = users;
-        this.movements = movements;
-        this.cards = cards;
     }
 
     public Long getId() {
