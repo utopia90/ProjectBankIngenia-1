@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -26,6 +27,8 @@ public class ProjectBankApplication implements CommandLineRunner {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	PasswordEncoder encoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectBankApplication.class, args);
@@ -59,8 +62,11 @@ public class ProjectBankApplication implements CommandLineRunner {
 		Movement movement6=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
 		Movement movement7=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
 
-		User user1 = new User("Borja", "Díaz", "borja@diaz", "1234");
-		User user2 = new User("Elena", "Fernández", "elena@fernandez", "1234");
+		User user1 = new User("Borja", "Díaz", "borja@diaz", encoder.encode("1234"));
+		User user2 = new User("Elena", "Fernández", "elena@fernandez", encoder.encode("1234"));
+		User salvi = new User("salvi", "Lopez", "salvilopezpruebas@gmail.com", encoder.encode("salvi"));
+
+
 
 		account1.addMovimiento(movement1);
 		account1.addMovimiento(movement2);
@@ -88,9 +94,11 @@ public class ProjectBankApplication implements CommandLineRunner {
 
 		accountService.createAccount(account1);
 		accountService.createAccount(account2);
-
+		userService.createUser(salvi);
 		userService.createUser(user1);
 		userService.createUser(user2);
+
+
 
 
 
