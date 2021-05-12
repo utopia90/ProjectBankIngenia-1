@@ -26,7 +26,7 @@ public class BankCard {
     private Date expirationDate;
 
     @ApiModelProperty("Clave cuenta tipo Cuenta")
-    @ManyToOne()
+    @ManyToOne(optional = true)
     @JoinColumn(name = "id_account")
     private Account account;
 

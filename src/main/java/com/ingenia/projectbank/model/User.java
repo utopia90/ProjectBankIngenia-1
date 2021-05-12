@@ -40,8 +40,6 @@ public class User {
     private List<Account> accounts = new ArrayList<>();
 
 
-
-
     public User() {
     }
 
