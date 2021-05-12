@@ -57,6 +57,39 @@ public class MovementController {
         log.debug("Rest request for Date  Movements");
         return movementService.findAllMovements();
     }
+    @GetMapping("/movements/{accountId}")
+    @ApiOperation(value = "encuentra todas las Movimientos ")
+    public List<Movement> findAllMovementsByAccountId(@PathVariable Long accountId,
+                                                      @RequestParam(name = "firstDate", required = false) String startDate,
+                                                      @RequestParam(name = "finishDate", required = false) String finishDate,
+                                                      @RequestParam(name = "operation", required = false) OperationType operation,
+                                                      @RequestParam(name = "category", required = false) CategoryType category,
+                                                      @RequestParam(name = "payment", required = false) PaymentType payment){
+        if(operation!=null){
+            log.debug("Rest request for movements filter by operation");
+            return movementService.findMovementsByOperationAccountId(accountId,operation);
+        }else if(category!=null){
+            log.debug("Rest request for movements filter by category");
+            return movementService.findMovementsByCategoryAccountId(accountId,category);
+        }else if(payment!=null){
+            log.debug("Rest request for movements filter by Payment");
+            return movementService.findMovementsByPaymentAccountId(accountId,payment);
+        } else if(startDate!=null&&finishDate!=null){
+            log.debug("Rest request Movements filter by initDate and finisDate ");
+            return movementService.findMovementsIntervalByAccountId(accountId, Instant.parse(startDate), Instant.parse(finishDate));
+        }
+        log.debug("Rest request for Date  Movements");
+        return movementService.findMovementsAllAccountId(accountId);
+    }
+
+
+
+
+
+
+
+
+
 
     /**
      *method return One Movement for ID

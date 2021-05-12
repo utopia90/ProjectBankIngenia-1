@@ -77,4 +77,29 @@ public class MovementServiceImpl  implements MovementService {
     public List<Movement> findMovementsByPayment(PaymentType paymentType) {
         return movementDao.findMovementsByPayment(paymentType);
     }
+
+    @Override
+    public List<Movement> findMovementsIntervalByAccountId(Long accountId, Instant firstDay, Instant lastDay) {
+        return null;
+    }
+
+    @Override
+    public List<Movement> findMovementsByCategoryAccountId(Long accountId, CategoryType categoryType) {
+        return null;
+    }
+
+    @Override
+    public List<Movement> findMovementsByOperationAccountId(Long accountId, OperationType operationType) {
+        return null;
+    }
+
+    @Override
+    public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {
+        return null;
+    }
+
+    @Override
+    public List<Movement> findMovementsAllAccountId(Long accountId) {
+        return movementDao.findMovementsAllAccountId(accountId);
+    }
 }

@@ -82,6 +82,40 @@ public class MovementDaoImpl implements MovementDao {
         }
         return new ArrayList<>();
     }
+
+    @Override
+    public List<Movement> findMovementsIntervalByAccountId(Long accountId, Instant firstDay, Instant lastDay) {
+        return null;
+    }
+
+    @Override
+    public List<Movement> findMovementsByCategoryAccountId(Long accountId, CategoryType categoryType) {
+        return null;
+    }
+
+    @Override
+    public List<Movement> findMovementsByOperationAccountId(Long accountId, OperationType operationType) {
+        return null;
+    }
+
+    @Override
+    public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {
+        return null;
+    }
+
+    @Override
+    public List<Movement> findMovementsAllAccountId(Long accountId) {
+        if (accountId != null) {
+            String consulta="select m FROM Movement m JOIN m.account a WHERE a.id = 2";
+            Query query = manager.createQuery(consulta);
+            System.out.println("----------------------------------------------");
+            System.out.println(query.getResultList());
+            System.out.println(consulta);
+            System.out.println("----------------------------------------------");
+            return query.getResultList();
+        }
+        return new ArrayList<>();
+    }
 }
 
 

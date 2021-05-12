@@ -25,4 +25,11 @@ public interface MovementService {
     List<Movement> findMovementsByCategory(CategoryType categoryType);
     List<Movement> findMovementsByOperation(OperationType operationType);
     List<Movement> findMovementsByPayment(PaymentType paymentType);
+
+    List<Movement> findMovementsIntervalByAccountId(Long accountId,Instant firstDay, Instant lastDay);
+    List<Movement> findMovementsByCategoryAccountId(Long accountId,CategoryType categoryType);
+    List<Movement> findMovementsByOperationAccountId(Long accountId,OperationType operationType);
+    List<Movement> findMovementsByPaymentAccountId(Long accountId,PaymentType paymentType);
+    List<Movement> findMovementsAllAccountId(Long accountId);
+
 }
