@@ -1,6 +1,8 @@
 package com.ingenia.projectbank.service;
 
 import com.ingenia.projectbank.model.Account;
+import com.ingenia.projectbank.model.User;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,8 +10,6 @@ import java.util.Optional;
 public interface AccountService {
 
     List<Account> findAllAccounts();
-
-    Optional<Account> findOneAccountById(Long id);
 
     Account createAccount(Account account);
 
@@ -19,4 +19,11 @@ public interface AccountService {
 
     void deleteAllAccounts();
 
+    /*Optional<Account> getAccountBalance(Account account, String balanceType);*/
+
+    Double getCurrentBalanceByAccountId(Long id);
+
+    List<Account> findAccountsByUser(User user);
+
+   Optional<Account> findAccountById(Long id);
 }

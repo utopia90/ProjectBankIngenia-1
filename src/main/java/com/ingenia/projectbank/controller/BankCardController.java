@@ -107,11 +107,11 @@ public class BankCardController {
      * method Delete all  BankCard
      * @return no content
      */
-    @ApiOperation(value = "Borra todas las empresas")
+    @ApiOperation(value = "Borra todas las tarjetas")
     @DeleteMapping(value = "/bankcards")
     public ResponseEntity<Void> deleteAll() {
         log.debug("DeleteAll");
-        bankCardService.findAllBankCards();
+        bankCardService.deleteAllBankCards();
         return  ResponseEntity.noContent().build();
     }
 }

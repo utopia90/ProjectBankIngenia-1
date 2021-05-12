@@ -1,5 +1,6 @@
 package com.ingenia.projectbank.service.ServiceImpl;
 
+import com.ingenia.projectbank.dao.UserDao;
 import com.ingenia.projectbank.model.User;
 import com.ingenia.projectbank.repository.UserRepository;
 import com.ingenia.projectbank.service.UserService;
@@ -14,6 +15,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository repository;
 
+
+    @Autowired
+    UserDao userDao;
+
     @Override
     public List<User> findAllUsers() {
 
@@ -22,8 +27,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findOneUserById(Long id) {
-        if(id!=null)repository.findById(id);
-        return Optional.empty();
+        if(id!=null)return this.repository.findById(id);
+        return null;
     }
 
     @Override

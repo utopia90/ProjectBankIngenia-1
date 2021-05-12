@@ -34,11 +34,11 @@ public class Movement {
     @ApiModelProperty("Clave cuenta tipo Account")
     @JoinColumn(name = "id_account")
     private Account account;
-//TODO---------------------------------------
+    //TODO---------------------------------------
     //@Column(name = "remaining-balance")
     private double remainingBalance;
 
-//TODO---------------------------------------
+    //TODO---------------------------------------
     @ApiModelProperty("Clave tipo categoría tipo Enum")
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;

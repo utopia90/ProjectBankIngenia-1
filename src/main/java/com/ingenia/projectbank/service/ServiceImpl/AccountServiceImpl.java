@@ -1,9 +1,12 @@
 package com.ingenia.projectbank.service.ServiceImpl;
 
+import com.ingenia.projectbank.dao.AccountDao;
 import com.ingenia.projectbank.model.Account;
+import com.ingenia.projectbank.model.User;
 import com.ingenia.projectbank.repository.AccountRepository;
 import com.ingenia.projectbank.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +17,8 @@ public class AccountServiceImpl  implements AccountService {
     @Autowired
     AccountRepository repository;
 
+    @Autowired
+    AccountDao accountDao;
 
 
     @Override
@@ -22,9 +27,9 @@ public class AccountServiceImpl  implements AccountService {
     }
 
     @Override
-    public Optional<Account> findOneAccountById(Long id) {
-        if(id!=null)return findOneAccountById(id);
-        return Optional.empty();
+    public Optional<Account> findAccountById(Long id) {
+        if(id!=null)return this.repository.findById(id);
+        return null;
     }
 
     @Override
@@ -46,5 +51,21 @@ public class AccountServiceImpl  implements AccountService {
     @Override
     public void deleteAllAccounts() {
         repository.deleteAll();
+    }
+
+   /* @Override
+    public Optional<Account> getAccountBalance(Account account, String balanceType) {
+        return Optional.empty();
+    }*/
+
+    @Override
+    public Double getCurrentBalanceByAccountId(Long id) {
+        return this.accountDao.getCurrentBalanceByAccountId(id);
+    }
+
+    @Override
+    public List<Account> findAccountsByUser(User user) {
+
+        return this.accountDao.findAccountsByUser(user);
     }
 }

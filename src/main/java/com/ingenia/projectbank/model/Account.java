@@ -46,14 +46,13 @@ public class Account {
         this.iban = iban;
         this.currentBalance = currentBalance;
     }
-/**
-    public HashMap getHistorialSaldo() {
-        return historialSaldo;
-    }
-
-    public void setHistorialSaldo(HashMap historialSaldo) {
-        this.historialSaldo = historialSaldo;
-    }*/
+    /**
+     public HashMap getHistorialSaldo() {
+     return historialSaldo;
+     }
+     public void setHistorialSaldo(HashMap historialSaldo) {
+     this.historialSaldo = historialSaldo;
+     }*/
 
     public Long getId() {
         return id;
@@ -105,7 +104,7 @@ public class Account {
 
     public void addMovimiento(Movement movement){
         if(movement.getOperationType()==OperationType.REST){
-                this.currentBalance=this.currentBalance-movement.getQuantity();
+            this.currentBalance=this.currentBalance-movement.getQuantity();
         }else if(movement.getOperationType()==OperationType.SUM){
             this.currentBalance=this.currentBalance+movement.getQuantity();
         }
