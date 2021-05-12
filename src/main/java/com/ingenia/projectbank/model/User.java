@@ -30,15 +30,16 @@ public class User {
     @ApiModelProperty("Clave password tipo String")
     private String password;
 
-    //@ApiModelProperty("Clave cuenta tipo Account")
+    @ApiModelProperty("Clave cuenta tipo Account")
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "users_accounts",
-            joinColumns = {@JoinColumn(name="users_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name="accounts_id", referencedColumnName = "id")}
+            joinColumns = {@JoinColumn(name="accounts_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="users_id", referencedColumnName = "id")}
     )
-    //@JsonIgnoreProperties("accounts")
     private List<Account> accounts = new ArrayList<>();
+
+
 
 
     public User() {
