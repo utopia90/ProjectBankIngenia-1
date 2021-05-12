@@ -13,6 +13,10 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,11 +27,12 @@ public class MovementDaoImpl implements MovementDao {
     private EntityManager manager;
 
     @Override
-    public List<Movement> findMovementsInterval(Date firstDay, Date lastDay) {
+    public List<Movement> findMovementsInterval(Instant firstDay, Instant lastDay) {
       if (firstDay != null && lastDay != null) {
-        //  Query query = manager.createQuery("SELECT e FROM Movement AS e WHERE e.date BE");
-           Query query = manager.createQuery("SELECT * FROM Movement WHERE date BETWEEN "+firstDay+" AND "+lastDay);
-           return query.getResultList();
+          //Timestamp timestampstart = Timestamp.from(firstDay);
+          //Timestamp timestampfinish = Timestamp.from(lastDay);
+          Query query = manager.createQuery("SELECT * FROM Movement WHERE date BETWEEN "+firstDay+" AND "+lastDay);
+         return query.getResultList();
         }
         return new ArrayList<>();
     }

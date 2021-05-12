@@ -37,6 +37,7 @@ public class User {
             joinColumns = {@JoinColumn(name="accounts_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="users_id", referencedColumnName = "id")}
     )
+    @JsonIgnoreProperties("users")
     private List<Account> accounts = new ArrayList<>();
 
 

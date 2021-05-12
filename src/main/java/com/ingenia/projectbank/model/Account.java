@@ -30,6 +30,7 @@ public class Account {
 
     @ApiModelProperty("Clave movimiento tipo Movement")
     @OneToMany(mappedBy = "account",orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("account")
     private List<Movement> movements = new ArrayList<>();
 
     @ApiModelProperty("Clave Tarjeta tipo Card")

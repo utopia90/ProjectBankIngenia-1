@@ -11,6 +11,8 @@ import com.ingenia.projectbank.service.MovementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -57,7 +59,7 @@ public class MovementServiceImpl  implements MovementService {
     }
 
     @Override
-    public List<Movement> findMovementsInterval(Date firstDay, Date lastDay) {
+    public List<Movement> findMovementsInterval(Instant firstDay, Instant lastDay) {
         return movementDao.findMovementsInterval(firstDay,lastDay);
     }
 
