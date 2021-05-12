@@ -25,7 +25,6 @@ public class AuthController {
     private final UserDetailsServiceImpl userDetailsService;
     private final JWTUtil jwtUtil;
 
-
     public AuthController(UserService userService, UserDetailsServiceImpl userDetailsService, JWTUtil jwtUtil) {
         this.userService = userService;
         this.userDetailsService = userDetailsService;
@@ -36,11 +35,9 @@ public class AuthController {
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest userRequest) {
         if (userService.existsByEmailAndPassword(userRequest.getEmail(),userRequest.getPassword())) {
             User UserEncontrado=userService.findByEmailAndPassword(userRequest.getEmail(), userRequest.getPassword());
-            //TODO pendiente de configuracion Spring Security
             UserDetails userDetails = userDetailsService.loadUserByUsername(UserEncontrado.getEmail());
             String jwt = jwtUtil.generateToken(userDetails);
             return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.OK);
-            //TODO pendiente de configuracion Spring Security
         }
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }

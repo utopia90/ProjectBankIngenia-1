@@ -77,4 +77,12 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public Boolean existsByEmailAndPassword(String email, String password) {
+        if(repository.existsUserByEmail(email)){
+            User user=repository.findUserByEmail(email);
+            return passwordEncoder.matches(password,user.getPassword());
+        }
+        return false;
+    }
 }
