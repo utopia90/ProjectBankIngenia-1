@@ -3,6 +3,8 @@ package com.ingenia.projectbank.model;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -23,7 +25,7 @@ public class BankCard {
     private String ccv;
 
     @ApiModelProperty("Clave fecha caducidad tipo Date")
-    private Date expirationDate;
+    private Instant expirationDate;
 
     @ApiModelProperty("Clave cuenta tipo Cuenta")
     @ManyToOne(optional = true)
@@ -33,7 +35,7 @@ public class BankCard {
     public BankCard() {
     }
 
-    public BankCard(String pan, String ccv, Date expirationDate, Account account) {
+    public BankCard(String pan, String ccv, Instant expirationDate, Account account) {
         this.pan = pan;
         this.ccv = ccv;
         this.expirationDate = expirationDate;
@@ -64,11 +66,11 @@ public class BankCard {
         this.ccv = ccv;
     }
 
-    public Date getExpirationDate() {
+    public Instant getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(Instant expirationDate) {
         this.expirationDate = expirationDate;
     }
 

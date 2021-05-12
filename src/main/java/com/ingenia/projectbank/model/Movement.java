@@ -1,8 +1,11 @@
 package com.ingenia.projectbank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -24,8 +27,8 @@ public class Movement {
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
-    @ApiModelProperty("Clave fecha tipo Date")
-    private Date date;
+    @ApiModelProperty("Clave fecha tipo Localdate")
+    private Instant date;
 
     @ApiModelProperty("Clave cantidad tipo Double")
     private Double quantity;
@@ -47,7 +50,7 @@ public class Movement {
     public Movement() {
     }
 
-    public Movement(OperationType operationType, PaymentType paymentType, Date date, Double quantity, Account account, CategoryType categoryType) {
+    public Movement(OperationType operationType, PaymentType paymentType, Instant date, Double quantity, Account account, CategoryType categoryType) {
         this.operationType = operationType;
         this.paymentType = paymentType;
         this.date = date;
@@ -55,6 +58,7 @@ public class Movement {
         this.account = account;
         this.categoryType = categoryType;
     }
+
     //TODO---------------------------------------
     public double getRemainingBalance() {
         return remainingBalance;
@@ -88,11 +92,11 @@ public class Movement {
         this.paymentType = paymentType;
     }
 
-    public Date getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 
