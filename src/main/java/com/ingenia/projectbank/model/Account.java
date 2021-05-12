@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Entity
@@ -35,6 +36,9 @@ public class Account {
     @OneToMany(mappedBy = "account", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<BankCard> cards = new ArrayList<>();
 
+
+    //private HashMap historialSaldo = new HashMap();
+
     public Account() {
     }
 
@@ -42,6 +46,14 @@ public class Account {
         this.iban = iban;
         this.currentBalance = currentBalance;
     }
+/**
+    public HashMap getHistorialSaldo() {
+        return historialSaldo;
+    }
+
+    public void setHistorialSaldo(HashMap historialSaldo) {
+        this.historialSaldo = historialSaldo;
+    }*/
 
     public Long getId() {
         return id;
@@ -97,6 +109,8 @@ public class Account {
         }else if(movement.getOperationType()==OperationType.SUM){
             this.currentBalance=this.currentBalance+movement.getQuantity();
         }
+        //this.historialSaldo.put(movement.getAccount(),this.currentBalance);
+        movement.setRemainingBalance(this.currentBalance);
         this.getMovements().add(movement);
 
     }

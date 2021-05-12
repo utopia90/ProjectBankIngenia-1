@@ -5,6 +5,7 @@ import com.ingenia.projectbank.model.CategoryType;
 import com.ingenia.projectbank.model.Movement;
 import com.ingenia.projectbank.model.OperationType;
 import com.ingenia.projectbank.model.PaymentType;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Repository
 public class MovementDaoImpl implements MovementDao {
 
     @PersistenceContext

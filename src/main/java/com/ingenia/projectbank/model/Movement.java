@@ -35,10 +35,9 @@ public class Movement {
     @JoinColumn(name = "id_account")
     private Account account;
 //TODO---------------------------------------
-    /*@ManyToOne()
-    @ApiModelProperty("Clave categoria tipo Category")
-    @JoinColumn(name = "id_category")
-    private Category category;*/
+    //@Column(name = "remaining-balance")
+    private double remainingBalance;
+
 //TODO---------------------------------------
     @ApiModelProperty("Clave tipo categoría tipo Enum")
     @Enumerated(EnumType.STRING)
@@ -56,7 +55,15 @@ public class Movement {
         this.account = account;
         this.categoryType = categoryType;
     }
+    //TODO---------------------------------------
+    public double getRemainingBalance() {
+        return remainingBalance;
+    }
 
+    public void setRemainingBalance(double remainingBalance) {
+        this.remainingBalance = remainingBalance;
+    }
+    //TODO---------------------------------------
     public Long getId() {
         return id;
     }
