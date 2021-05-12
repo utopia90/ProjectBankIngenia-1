@@ -22,7 +22,6 @@ public interface UserService {
 
     User findByEmailAndPassword(String email , String password);
 
-    Boolean existsByEmailAndPassword(String email , String password);
 
 
 

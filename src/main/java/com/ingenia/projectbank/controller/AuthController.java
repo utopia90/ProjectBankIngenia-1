@@ -44,4 +44,18 @@ public class AuthController {
         }
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
+
+    @PostMapping("/registro")
+    public ResponseEntity<User> registro(@RequestBody User user) {
+        if (user==null) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        } else {
+            User userCreado=userService.createUser(user);
+            if(userCreado==null){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            //envioEmailService.sendEmail(user.getEmail(),"Registro realizado correctamente  ","Registro correcto,  Logueate Con tus Credenciales para Iniciar Sesión");
+            return ResponseEntity.ok().body(userCreado);
+        }
+    }
 }

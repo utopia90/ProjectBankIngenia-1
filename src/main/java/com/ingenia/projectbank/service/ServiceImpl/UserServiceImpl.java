@@ -5,6 +5,7 @@ import com.ingenia.projectbank.model.User;
 import com.ingenia.projectbank.repository.UserRepository;
 import com.ingenia.projectbank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository repository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     UserDao userDao;
@@ -33,6 +36,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
+        if(repository.existsUserByEmail(user.getEmail())){
+            return null;
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return repository.save(user);
     }
 
@@ -61,14 +68,13 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public User findByEmailAndPassword(String email, String password) {
-        if (repository.existsByEmailAndPassword(email,password)) {
-            return repository.findByEmailAndPassword(email,password);
+        if (repository.existsUserByEmail(email)) {
+            User user=repository.findUserByEmail(email);
+            if(passwordEncoder.matches(password,user.getPassword())){
+                return repository.findByEmailAndPassword(email,password);
+            }
         }
         return null;
     }
 
-    @Override
-    public Boolean existsByEmailAndPassword(String email, String password) {
-        return repository.existsByEmailAndPassword(email,password);
-    }
 }
