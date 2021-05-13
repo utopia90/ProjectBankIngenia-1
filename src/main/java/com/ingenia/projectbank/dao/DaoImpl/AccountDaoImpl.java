@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,10 +31,7 @@ public class AccountDaoImpl implements AccountDao {
             return account.getCurrentBalance();
 
     }
-    /*@Override
-    public Query getAccountBalance(Account account, String balanceType) {
-        return null;
-    }*/
+
 }
 
     @Override
@@ -45,6 +43,39 @@ public class AccountDaoImpl implements AccountDao {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public Double getAccountBalanceByTypeAndUser(User user, String balanceType) {
+        User userOpt = manager.find(User.class,user.getId());
+        List<Account> accounts = userOpt.getAccounts();
+        Double totalBalance = 0.00;
+
+        if(userOpt != null){
+            switch (balanceType){
+                case "credit":
+                    for(Account account: accounts){
+                        totalBalance += account.getCurrentCreditCardBalance();
+                        return totalBalance;
+                    }
+                case "debit":
+                    for(Account account: accounts){
+                        totalBalance += account.getCurrentBalance();
+                        return totalBalance;
+                    }
+                case "account":
+                    for(Account account: accounts){
+                        totalBalance += account.getCurrentBalance();
+                        return totalBalance;
+                    }
+                case "global":
+                    for(Account account: accounts) {
+                        totalBalance += account.getCurrentGlobalBalance();
+                        return totalBalance;
+                    }
+            }
+        }
+      return null;
     }
 
 }

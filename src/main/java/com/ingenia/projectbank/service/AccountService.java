@@ -19,7 +19,7 @@ public interface AccountService {
 
     void deleteAllAccounts();
 
-    /*Optional<Account> getAccountBalance(Account account, String balanceType);*/
+    Double getAccountBalanceByTypeAndUser(User user, String balanceType);
 
     Double getCurrentBalanceByAccountId(Long id);
 
