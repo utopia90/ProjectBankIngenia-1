@@ -106,12 +106,8 @@ public class MovementDaoImpl implements MovementDao {
     @Override
     public List<Movement> findMovementsAllAccountId(Long accountId) {
         if (accountId != null) {
-            String consulta="select m FROM Movement m JOIN m.account a WHERE a.id =:"+accountId;
+            String consulta="select m FROM Movement m where m.account.id ="+accountId;
             Query query = manager.createQuery(consulta);
-            System.out.println("----------------------------------------------");
-            System.out.println(query.getResultList());
-            System.out.println(consulta);
-            System.out.println("----------------------------------------------");
             return query.getResultList();
         }
         return new ArrayList<>();
