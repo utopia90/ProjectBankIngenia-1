@@ -67,6 +67,7 @@ public class MovementController {
                                                       @RequestParam(name = "payment", required = false) String payment){
         if(operation!=null){
             log.debug("Rest request for movements for account ID filter by operation");
+
             return movementService.findMovementsByOperationAccountId(accountid,operation);
         }else if(category!=null){
             log.debug("Rest request for movements for account IDfilter by category");
@@ -81,15 +82,6 @@ public class MovementController {
         log.debug("Rest request Movements for account ID ");
         return movementService.findMovementsAllAccountId(accountid);
     }
-
-
-
-
-
-
-
-
-
 
     /**
      *method return One Movement for ID
