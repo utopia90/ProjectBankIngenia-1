@@ -99,6 +99,8 @@ public class MovementServiceImpl  implements MovementService {
         switch(paymentType.toUpperCase()) {
             case "CREDIT":
                 return movementDao.findMovementsByPayment(PaymentType.CREDIT);
+            case "DEBIT":
+                return movementDao.findMovementsByPayment(PaymentType.DEBIT);
             case "ACCOUNT":
                 return movementDao.findMovementsByPayment(PaymentType.ACCOUNT);
             default:
@@ -148,6 +150,8 @@ public class MovementServiceImpl  implements MovementService {
         switch(paymentType.toUpperCase()) {
             case "CREDIT":
                 return movementDao.findMovementsByPaymentAccountId(accountId,PaymentType.CREDIT);
+            case "DEBIT":
+                return movementDao.findMovementsByPaymentAccountId(accountId,PaymentType.DEBIT);
             case "ACCOUNT":
                 return movementDao.findMovementsByPaymentAccountId(accountId,PaymentType.ACCOUNT);
             default:

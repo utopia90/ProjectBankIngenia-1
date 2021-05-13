@@ -86,6 +86,9 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         resultado=userService.createUser(user);
+
+        if(resultado==null)return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         return  ResponseEntity.created(new URI("/api/user/"+resultado.getId())).body(resultado);
     }
 
@@ -96,7 +99,7 @@ public class UserController {
      */
     @PutMapping(value = "/user")
     @ApiOperation(value = "modificar usuario")
-    public ResponseEntity<User> modifyUser(@ApiParam("Objeto User a modificar")@RequestBody User user){
+    public ResponseEntity<User> modifyUser(@ApiParam("Objeto User a modificar")@RequestBody User user) throws URISyntaxException{
         log.debug("Modify user");
         User resultado=null;
         if (user.getId()==null) {
@@ -104,7 +107,9 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         resultado = userService.updateUser(user);
-        return ResponseEntity.ok().body(resultado);
+        if(resultado==null)return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       return ResponseEntity.ok().body(resultado);
+
     }
     /**
      *method Delete One  BankCard
@@ -115,8 +120,11 @@ public class UserController {
     @ApiOperation(value = "Borra un usuario por id")
     public ResponseEntity<Void> deleteOne(@ApiParam("Clave primaria del usuario")@PathVariable("id") Long id) {
         log.debug("Delete user");
-        userService.deleteOneUserById(id);
-        return ResponseEntity.noContent().build();
+        if(id!=null){
+            userService.deleteOneUserById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     /**
      * method Delete all User
@@ -127,7 +135,7 @@ public class UserController {
     public ResponseEntity<Void> deleteAll() {
         log.debug("DeleteAll");
         userService.deleteAllUsers();
-        return  ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
