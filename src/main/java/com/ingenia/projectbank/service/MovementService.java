@@ -3,6 +3,7 @@ package com.ingenia.projectbank.service;
 import com.ingenia.projectbank.model.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -21,12 +22,12 @@ public interface MovementService {
     void deleteOneMovementById(Long id);
 
     void deleteAllMovements();
-    List<Movement> findMovementsInterval(Instant firstDay, Instant lastDay);
+    List<Movement> findMovementsInterval(LocalDate firstDay, LocalDate lastDay);
     List<Movement> findMovementsByCategory(String categoryType);
     List<Movement> findMovementsByOperation(String operationType);
     List<Movement> findMovementsByPayment(String paymentType);
 
-    List<Movement> findMovementsIntervalByAccountId(Long accountId,Instant firstDay, Instant lastDay);
+    List<Movement> findMovementsIntervalByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay);
     List<Movement> findMovementsByCategoryAccountId(Long accountId,String categoryType);
     List<Movement> findMovementsByOperationAccountId(Long accountId,String operationType);
     List<Movement> findMovementsByPaymentAccountId(Long accountId,String paymentType);

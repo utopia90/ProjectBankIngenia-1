@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
@@ -29,11 +30,10 @@ public class MovementDaoImpl implements MovementDao {
     private EntityManager manager;
 
     @Override
-    public List<Movement> findMovementsInterval(Instant firstDay, Instant lastDay) {
+    public List<Movement> findMovementsInterval(LocalDate firstDay, LocalDate lastDay) {
       if (firstDay != null && lastDay != null) {
-          //Timestamp timestampstart = Timestamp.from(firstDay);
-          //Timestamp timestampfinish = Timestamp.from(lastDay);
-          Query query = manager.createQuery("SELECT * FROM Movement WHERE date BETWEEN "+firstDay+" AND "+lastDay);
+          String sql="SELECT m FROM Movement m WHERE m.date BETWEEN '"+firstDay+"' AND '"+lastDay+"'";
+          Query query = manager.createQuery(sql);
          return query.getResultList();
         }
         return new ArrayList<>();
@@ -90,9 +90,10 @@ public class MovementDaoImpl implements MovementDao {
 
 
     @Override
-    public List<Movement> findMovementsIntervalByAccountId(Long accountId, Instant firstDay, Instant lastDay) {
+    public List<Movement> findMovementsIntervalByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay) {
         if (firstDay != null&&lastDay!=null) {
-            Query query = manager.createQuery("select m FROM Movement m where   m.account.id ="+accountId+" AND m.date between ="+firstDay+"AND"+lastDay );
+            String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE  a.id ="+accountId+" AND m.date BETWEEN '"+firstDay+"' AND '"+lastDay+"'";
+            Query query = manager.createQuery(sql);
             return query.getResultList();
         }
         return new ArrayList<>();

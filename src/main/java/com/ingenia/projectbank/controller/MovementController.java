@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -52,7 +53,9 @@ public class MovementController {
             return movementService.findMovementsByPayment(payment);
         } else if(startdate!=null&&finishdate!=null){
             log.debug("Rest request Movements filter by initDate and finisDate ");
-            return movementService.findMovementsInterval( Instant.parse(startdate), Instant.parse(finishdate));
+            LocalDate localDateI = LocalDate.parse(startdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate localDateF = LocalDate.parse(finishdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return movementService.findMovementsInterval( localDateI, localDateF);
         }
         log.debug("Rest request Movements ");
         return movementService.findAllMovements();
@@ -77,7 +80,9 @@ public class MovementController {
             return movementService.findMovementsByPaymentAccountId(accountid,payment);
         } else if(startdate!=null&&finishdate!=null){
             log.debug("Rest request Movements for account ID filter by initDate and finisDate ");
-            return movementService.findMovementsIntervalByAccountId(accountid, Instant.parse(startdate), Instant.parse(finishdate));
+            LocalDate localDateI = LocalDate.parse(startdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate localDateF = LocalDate.parse(finishdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return movementService.findMovementsIntervalByAccountId(accountid,localDateI, localDateF);
         }
         log.debug("Rest request Movements for account ID ");
         return movementService.findMovementsAllAccountId(accountid);
@@ -132,6 +137,8 @@ public class MovementController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         resultado = movementService.updateMovement(movement);
+        if(resultado==null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         return ResponseEntity.ok().body(resultado);
     }
     /**
@@ -143,8 +150,11 @@ public class MovementController {
     @ApiOperation(value = "Borra una movimiento por id")
     public ResponseEntity<Void> deleteOne(@ApiParam("Clave primaria del movimiento")@PathVariable("id") Long id) {
         log.debug("Delete movement");
-        movementService.deleteOneMovementById(id);
-        return ResponseEntity.noContent().build();
+        if(id!=null){
+            movementService.deleteOneMovementById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     /**
      * method Delete all  Movementd
@@ -155,6 +165,6 @@ public class MovementController {
     public ResponseEntity<Void> deleteAll() {
         log.debug("DeleteAll");
         movementService.deleteAllMovements();
-        return  ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
