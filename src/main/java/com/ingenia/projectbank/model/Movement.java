@@ -41,6 +41,8 @@ public class Movement {
     //TODO---------------------------------------
     //@Column(name = "remaining-balance")
     private double remainingBalance;
+    private double reminingCreditBalance;
+
 
     //TODO---------------------------------------
     @ApiModelProperty("Clave tipo categoría tipo Enum")
@@ -68,6 +70,15 @@ public class Movement {
     public void setRemainingBalance(double remainingBalance) {
         this.remainingBalance = remainingBalance;
     }
+
+    public double getReminingCreditBalance() {
+        return reminingCreditBalance;
+    }
+
+    public void setReminingCreditBalance(double reminingCreditBalance) {
+        this.reminingCreditBalance = reminingCreditBalance;
+    }
+
     //TODO---------------------------------------
     public Long getId() {
         return id;

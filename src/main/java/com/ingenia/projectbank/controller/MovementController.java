@@ -114,7 +114,7 @@ public class MovementController {
      * @throws URISyntaxException
      */
     @PostMapping("/movement")
-    @ApiOperation(value = "crea una BankCard")
+    @ApiOperation(value = "crea una movimiento")
     public ResponseEntity<Movement> createMovement(@ApiParam("Objeto Movement para Crearlo")@RequestBody Movement movement) throws URISyntaxException{
         log.debug("Create Movement");
         Movement resultado=null;
