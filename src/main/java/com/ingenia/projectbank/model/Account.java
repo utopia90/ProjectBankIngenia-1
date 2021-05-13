@@ -18,6 +18,7 @@ public class Account {
     private Long id;
 
     @ApiModelProperty("Clave iban tipo String")
+    @Column(unique = true)
     private String iban;
 
     @ApiModelProperty("Clave saldo actual cuenta tipo Double")

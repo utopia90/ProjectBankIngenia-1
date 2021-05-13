@@ -62,6 +62,17 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/accountbyiban/{iban}")
+    @ApiOperation(value = "encuentra una Cuenta Bancaria por su id")
+    public ResponseEntity<Account> findOneAccount(@ApiParam("Clave primaria de la Cuenta Bancaria") @PathVariable String iban) {
+        log.debug("Rest request an Account with iban: " + iban);
+        Optional<Account> accountOpt = accountService.findAccountByIban(iban);
+        if (accountOpt.isPresent())
+            return ResponseEntity.ok().body(accountOpt.get());
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     /**
      * create account
      *
@@ -75,11 +86,13 @@ public class AccountController {
         log.debug("Create Account");
         Account resultado = null;
         if (account.getId() != null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         resultado = accountService.createAccount(account);
+        if(resultado==null)return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return ResponseEntity.created(new URI("/api/account/" + resultado.getId())).body(resultado);
     }
+
 
     /**
      * Modificar Account
@@ -98,6 +111,7 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         resultado = accountService.updateAccount(account);
+        if(resultado==null)return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok().body(resultado);
     }
 
@@ -112,7 +126,7 @@ public class AccountController {
     public ResponseEntity<Void> deleteOne(@ApiParam("Clave primaria de la account") @PathVariable("id") Long id) {
         log.debug("Delete account");
         accountService.deleteOneAccountById(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**

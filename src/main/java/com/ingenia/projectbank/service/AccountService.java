@@ -26,4 +26,6 @@ public interface AccountService {
     List<Account> findAccountsByUser(User user);
 
    Optional<Account> findAccountById(Long id);
+
+    Optional<Account> findAccountByIban(String iban);
 }

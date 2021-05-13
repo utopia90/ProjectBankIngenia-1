@@ -8,6 +8,7 @@ import com.ingenia.projectbank.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,8 +34,19 @@ public class AccountServiceImpl  implements AccountService {
     }
 
     @Override
+    public Optional<Account> findAccountByIban(String iban) {
+            return repository.findAccountByIban(iban);
+    }
+
+    @Override
     public Account createAccount(Account account) {
-        return repository.save(account);
+        if (!ObjectUtils.isEmpty(account)) {
+            if (repository.existsAccountByIban(account.getIban())) {
+                return null;
+            }
+            return repository.save(account);
+        }
+        return null;
     }
 
     @Override

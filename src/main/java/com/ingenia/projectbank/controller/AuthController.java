@@ -34,7 +34,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest userRequest) {
         if (userService.existsByEmailAndPassword(userRequest.getEmail(),userRequest.getPassword())) {
-            User UserEncontrado=userService.findByEmailAndPassword(userRequest.getEmail(), userRequest.getPassword());
+            User UserEncontrado=userService.findUserByEmail(userRequest.getEmail());
             UserDetails userDetails = userDetailsService.loadUserByUsername(UserEncontrado.getEmail());
             String jwt = jwtUtil.generateToken(userDetails);
             return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.OK);
@@ -43,15 +43,12 @@ public class AuthController {
     }
 
     @PostMapping("/registro")
-    public ResponseEntity<User> registro(@RequestBody User user) {
-        if (user==null) {
+    public ResponseEntity<User> registro(@RequestBody AuthenticationRequest userRequest) {
+        if (userRequest.getPassword()==null||userRequest.getEmail()==null) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         } else {
+            User user= new User("","",userRequest.getEmail(),userRequest.getPassword());
             User userCreado=userService.createUser(user);
-            if(userCreado==null){
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-            //envioEmailService.sendEmail(user.getEmail(),"Registro realizado correctamente  ","Registro correcto,  Logueate Con tus Credenciales para Iniciar Sesión");
             return ResponseEntity.ok().body(userCreado);
         }
     }

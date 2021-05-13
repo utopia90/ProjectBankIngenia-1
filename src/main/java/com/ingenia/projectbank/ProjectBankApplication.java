@@ -62,9 +62,9 @@ public class ProjectBankApplication implements CommandLineRunner {
 
 
 
-		User user1 = new User("Borja", "Díaz", "borja@diaz", encoder.encode("1234"));
-		User user2 = new User("Elena", "Fernández", "elena@fernandez", encoder.encode("1234"));
-		User salvi = new User("salvi", "Lopez", "salvilopezpruebas@gmail.com", encoder.encode("salvi"));
+		User user1 = new User("Borja", "Díaz", "borja@diaz",encoder.encode("1234"));
+		User user2 = new User("Elena", "Fernández", "elena@fernandez",encoder.encode("1234"));
+		User salvi = new User("salvi", "Lopez", "salvilopezpruebas@gmail.com",encoder.encode("salvi"));
 
 
 		BankCard bankCard1 = new BankCard("392489234898492", "221", Instant.now());
