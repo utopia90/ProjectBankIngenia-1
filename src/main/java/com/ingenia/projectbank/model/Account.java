@@ -130,11 +130,11 @@ public class Account {
     }
 
     public void addMovimiento(Movement movement){
-        if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.ACCOUNT || movement.getPaymentType()== PaymentType.DEBIT){
+        if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.ACCOUNT){
             this.currentBalance=this.currentBalance-movement.getQuantity();
             movement.setRemainingBalance(this.currentBalance);
             this.getMovements().add(movement);
-        }else if(movement.getOperationType()==OperationType.SUM && movement.getPaymentType()== PaymentType.ACCOUNT || movement.getPaymentType()== PaymentType.DEBIT){
+        }else if(movement.getOperationType()==OperationType.SUM && movement.getPaymentType()== PaymentType.ACCOUNT){
             this.currentBalance=this.currentBalance+movement.getQuantity();
             movement.setRemainingBalance(this.currentBalance);
             this.getMovements().add(movement);
@@ -149,10 +149,17 @@ public class Account {
             movement.setReminingCreditBalance(this.currentBalance);
             this.getMovements().add(movement);
         }
-
+        if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.DEBIT){
+            this.currentBalance=this.currentBalance-movement.getQuantity();
+            movement.setRemainingBalance(this.currentBalance);
+            this.getMovements().add(movement);
+        }else if(movement.getOperationType()==OperationType.SUM && movement.getPaymentType()== PaymentType.DEBIT){
+            this.currentBalance=this.currentBalance+movement.getQuantity();
+            movement.setRemainingBalance(this.currentBalance);
+            this.getMovements().add(movement);
+        }
 
     }
-
     @Override
     public String toString() {
         return "Account{" +
