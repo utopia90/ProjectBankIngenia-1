@@ -108,7 +108,7 @@ public class MovementDaoImpl implements MovementDao {
             List<Movement> movementList = query.getResultList();
             List<Movement> movementListF =new ArrayList<>();
             for (int i = 0; i < movementList.size(); i++) {
-                if(movementList.get(i).getCategoryType().equals(categoryType)){
+                if(movementList.get(i).getCategoryType().equals(categoryType.toString().toUpperCase())){
                     movementListF.add(movementList.get(i));
                 }
             }
@@ -128,7 +128,7 @@ public class MovementDaoImpl implements MovementDao {
             List<Movement> movementList = query.getResultList();
             List<Movement> movementListF =new ArrayList<>();
             for (int i = 0; i < movementList.size(); i++) {
-                if(movementList.get(i).getOperationType().equals(operationType)){
+                if(movementList.get(i).getOperationType().equals(operationType.toString().toUpperCase())){
                     movementListF.add(movementList.get(i));
                 }
             }
@@ -148,7 +148,7 @@ public class MovementDaoImpl implements MovementDao {
             List<Movement> movementList = query.getResultList();
             List<Movement> movementListF =new ArrayList<>();
             for (int i = 0; i < movementList.size(); i++) {
-                if(movementList.get(i).getPaymentType().equals(paymentType)){
+                if(movementList.get(i).getPaymentType().equals(paymentType.toString().toUpperCase())){
                     movementListF.add(movementList.get(i));
                 }
             }
