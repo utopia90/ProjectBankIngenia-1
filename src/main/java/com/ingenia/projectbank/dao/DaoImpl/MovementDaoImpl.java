@@ -85,29 +85,44 @@ public class MovementDaoImpl implements MovementDao {
 
     @Override
     public List<Movement> findMovementsIntervalByAccountId(Long accountId, Instant firstDay, Instant lastDay) {
-        return null;
+        if (firstDay != null&&lastDay!=null) {
+            Query query = manager.createQuery("select m FROM Movement m where   m.account.id ="+accountId+" AND m.date between ="+firstDay+"AND"+lastDay );
+            return query.getResultList();
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public List<Movement> findMovementsByCategoryAccountId(Long accountId, CategoryType categoryType) {
-        return null;
+        if (categoryType != null&&accountId!=null) {
+            Query query = manager.createQuery("select m FROM Movement m where  m.categoryType="+categoryType+" AND m.account.id ="+accountId );
+            return query.getResultList();
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public List<Movement> findMovementsByOperationAccountId(Long accountId, OperationType operationType) {
-        return null;
+        if (operationType != null&&accountId!=null) {
+            Query query = manager.createQuery("select m FROM Movement m where  m.operationType="+operationType+" AND m.account.id ="+accountId );
+            return query.getResultList();
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {
-        return null;
+        if (paymentType != null&&accountId!=null) {
+            Query query = manager.createQuery("select m FROM Movement m where  m.paymentType="+paymentType+" AND m.account.id ="+accountId );
+            return query.getResultList();
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public List<Movement> findMovementsAllAccountId(Long accountId) {
         if (accountId != null) {
-            String consulta="select m FROM Movement m where m.account.id ="+accountId;
-            Query query = manager.createQuery(consulta);
+            Query query = manager.createQuery("select m FROM Movement m where m.account.id ="+accountId);
             return query.getResultList();
         }
         return new ArrayList<>();

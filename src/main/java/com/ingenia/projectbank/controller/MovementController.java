@@ -57,7 +57,7 @@ public class MovementController {
         log.debug("Rest request for Date  Movements");
         return movementService.findAllMovements();
     }
-    @GetMapping("/movements/{accountId}")
+    @GetMapping("/movementsaccount/{accountId}")
     @ApiOperation(value = "encuentra todas las Movimientos ")
     public List<Movement> findAllMovementsByAccountId(@PathVariable Long accountId,
                                                       @RequestParam(name = "firstDate", required = false) String startDate,
