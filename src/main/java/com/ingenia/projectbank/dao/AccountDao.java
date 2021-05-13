@@ -4,9 +4,7 @@ import com.ingenia.projectbank.model.Account;
 import com.ingenia.projectbank.model.User;
 import org.springframework.http.ResponseEntity;
 
-import javax.persistence.Query;
 import java.util.List;
-import java.util.Optional;
 
 public interface AccountDao {
 
@@ -18,5 +16,5 @@ public interface AccountDao {
 
     ResponseEntity<Void> deleteAccountById(Long id);
 
-    ResponseEntity<Void> deleteAllAccounts();
+    void deleteAllAccounts();
 }

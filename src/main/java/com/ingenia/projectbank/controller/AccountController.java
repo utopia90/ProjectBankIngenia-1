@@ -143,7 +143,7 @@ public class AccountController {
     public ResponseEntity<Void> deleteAllAccounts() {
         log.debug("DeleteAll");
         accountService.deleteAllAccounts();
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

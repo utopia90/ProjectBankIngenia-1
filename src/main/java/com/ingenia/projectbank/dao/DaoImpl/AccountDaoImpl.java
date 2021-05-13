@@ -2,19 +2,17 @@ package com.ingenia.projectbank.dao.DaoImpl;
 
 import com.ingenia.projectbank.dao.AccountDao;
 import com.ingenia.projectbank.model.Account;
-import com.ingenia.projectbank.model.BankCard;
-import com.ingenia.projectbank.model.Movement;
 import com.ingenia.projectbank.model.User;
+import com.ingenia.projectbank.repository.AccountRepository;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class AccountDaoImpl implements AccountDao {
@@ -22,6 +20,8 @@ public class AccountDaoImpl implements AccountDao {
     @PersistenceContext
     private EntityManager manager;
 
+    @Autowired
+     AccountRepository repository;
 
     @Override
     public Double getCurrentBalanceByAccountId(Long id) {
@@ -96,15 +96,13 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public ResponseEntity<Void>  deleteAllAccounts() {
-        Query queryNative1 = (Query) manager.createNativeQuery("DELETE * from users_accounts");
-        Query queryNative2 = (Query) manager.createNativeQuery("DELETE * from Account");
+    public void deleteAllAccounts() {
+        
+        List<Account>accounts =repository.findAll();
 
-        queryNative1.executeUpdate();
-        queryNative2.executeUpdate();
-
-        return ResponseEntity.noContent().build();
-
+        for (int a = 0; a < accounts.size(); a++) {
+            deleteAccountById(accounts.get(a).getId());
+        }
     }
 
 }
