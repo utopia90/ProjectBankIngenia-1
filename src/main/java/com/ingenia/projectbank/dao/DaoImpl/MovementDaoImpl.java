@@ -40,13 +40,13 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByCategory(String categoryType) {
+    public List<Movement> findMovementsByCategory(CategoryType categoryType) {
         if(categoryType!=null) {
             CriteriaBuilder builder = manager.getCriteriaBuilder();
             CriteriaQuery<Movement> criteria = builder.createQuery(Movement.class);
             Root<Movement> root = criteria.from(Movement.class);
             criteria.select(root);
-            criteria.where(builder.equal(root.get("categoryType"),categoryType.toUpperCase()));
+            criteria.where(builder.equal(root.get("categoryType"),categoryType));
             Query query = manager.createQuery(criteria);
             manager.close();
             return query.getResultList();
@@ -56,13 +56,13 @@ public class MovementDaoImpl implements MovementDao {
 
 
     @Override
-    public List<Movement> findMovementsByOperation(String operationType) {
+    public List<Movement> findMovementsByOperation(OperationType operationType) {
         if(operationType!=null) {
             CriteriaBuilder builder = manager.getCriteriaBuilder();
             CriteriaQuery<Movement> criteria = builder.createQuery(Movement.class);
             Root<Movement> root = criteria.from(Movement.class);
             criteria.select(root);
-            criteria.where(builder.equal(root.get("operationType"),operationType.toUpperCase()));
+            criteria.where(builder.equal(root.get("operationType"),operationType));
             Query query = manager.createQuery(criteria);
             manager.close();
             return query.getResultList();
@@ -71,13 +71,13 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByPayment(String paymentType) {
+    public List<Movement> findMovementsByPayment(PaymentType paymentType) {
         if(paymentType!=null) {
             CriteriaBuilder builder = manager.getCriteriaBuilder();
             CriteriaQuery<Movement> criteria = builder.createQuery(Movement.class);
             Root<Movement> root = criteria.from(Movement.class);
             criteria.select(root);
-            criteria.where(builder.equal(root.get("paymentType"),paymentType.toUpperCase()));
+            criteria.where(builder.equal(root.get("paymentType"),paymentType));
             Query query = manager.createQuery(criteria);
             manager.close();
             return query.getResultList();
@@ -99,7 +99,7 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByCategoryAccountId(Long accountId, String categoryType) {
+    public List<Movement> findMovementsByCategoryAccountId(Long accountId, CategoryType categoryType) {
         //TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
         if (categoryType != null&&accountId!=null) {
             String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
@@ -108,7 +108,7 @@ public class MovementDaoImpl implements MovementDao {
             List<Movement> movementList = query.getResultList();
             List<Movement> movementListF =new ArrayList<>();
             for (int i = 0; i < movementList.size(); i++) {
-                if(movementList.get(i).getCategoryType().equals(categoryType.toUpperCase())){
+                if(movementList.get(i).getCategoryType().equals(categoryType)){
                     movementListF.add(movementList.get(i));
                 }
             }
@@ -119,7 +119,7 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByOperationAccountId(Long accountId, String operationType) {
+    public List<Movement> findMovementsByOperationAccountId(Long accountId, OperationType operationType) {
         //TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
         if (operationType != null&&accountId!=null) {
             String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
@@ -128,7 +128,7 @@ public class MovementDaoImpl implements MovementDao {
             List<Movement> movementList = query.getResultList();
             List<Movement> movementListF =new ArrayList<>();
             for (int i = 0; i < movementList.size(); i++) {
-                if(movementList.get(i).getOperationType().equals(operationType.toUpperCase())){
+                if(movementList.get(i).getOperationType().equals(operationType)){
                     movementListF.add(movementList.get(i));
                 }
             }
@@ -139,7 +139,7 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByPaymentAccountId(Long accountId, String paymentType) {
+    public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {
 //TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
         if (paymentType != null&&accountId!=null) {
             String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
@@ -150,9 +150,9 @@ public class MovementDaoImpl implements MovementDao {
 
             System.out.println("------------------****************************************************************---------------");
             System.out.println(paymentType.toString().toUpperCase());
-            System.out.println("------------------****************************************************************---------------");
+            System.out.println("---------------------------------");
             for (int i = 0; i < movementList.size(); i++) {
-                if(movementList.get(i).getPaymentType().equals(paymentType.toUpperCase())){
+                if(movementList.get(i).getPaymentType().equals(paymentType)){
                     movementListF.add(movementList.get(i));
                 }
             }

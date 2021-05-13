@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -65,17 +66,44 @@ public class MovementServiceImpl  implements MovementService {
 
     @Override
     public List<Movement> findMovementsByCategory(String categoryType) {
-        return movementDao.findMovementsByCategory(categoryType);
+        switch(categoryType.toUpperCase()) {
+            case "RESTAURANTS":
+                return movementDao.findMovementsByCategory(CategoryType.RESTAURANTS);
+            case "FUEL":
+                return movementDao.findMovementsByCategory(CategoryType.FUEL);
+            case "CLOTHES":
+                return movementDao.findMovementsByCategory(CategoryType.CLOTHES);
+            case "UTILITIES":
+                return movementDao.findMovementsByCategory(CategoryType.UTILITIES);
+            case "PAID":
+                return movementDao.findMovementsByCategory(CategoryType.PAID);
+            default:
+                return new ArrayList<>();
+        }
     }
 
     @Override
     public List<Movement> findMovementsByOperation(String operationType) {
-        return movementDao.findMovementsByOperation(operationType);
+        switch(operationType.toUpperCase()) {
+            case "SUM":
+                return movementDao.findMovementsByOperation(OperationType.SUM);
+            case "REST":
+                return movementDao.findMovementsByOperation(OperationType.REST);
+            default:
+                return new ArrayList<>();
+        }
     }
 
     @Override
     public List<Movement> findMovementsByPayment(String paymentType) {
-        return movementDao.findMovementsByPayment(paymentType);
+        switch(paymentType.toUpperCase()) {
+            case "CARD":
+                return movementDao.findMovementsByPayment(PaymentType.CARD);
+            case "ACCOUNT":
+                return movementDao.findMovementsByPayment(PaymentType.ACCOUNT);
+            default:
+                return new ArrayList<>();
+        }
     }
 
     @Override
@@ -85,17 +113,46 @@ public class MovementServiceImpl  implements MovementService {
 
     @Override
     public List<Movement> findMovementsByCategoryAccountId(Long accountId, String categoryType) {
-        return movementDao.findMovementsByCategoryAccountId(accountId,categoryType);
+        switch(categoryType.toUpperCase()) {
+            case "RESTAURANTS":
+                return movementDao.findMovementsByCategoryAccountId(accountId,CategoryType.RESTAURANTS);
+            case "FUEL":
+                return movementDao.findMovementsByCategoryAccountId(accountId,CategoryType.FUEL);
+            case "CLOTHES":
+                return movementDao.findMovementsByCategoryAccountId(accountId,CategoryType.CLOTHES);
+            case "UTILITIES":
+                return movementDao.findMovementsByCategoryAccountId(accountId,CategoryType.UTILITIES);
+            case "PAID":
+                return movementDao.findMovementsByCategoryAccountId(accountId,CategoryType.PAID);
+            default:
+                return new ArrayList<>();
+        }
     }
 
     @Override
     public List<Movement> findMovementsByOperationAccountId(Long accountId, String operationType) {
-        return movementDao.findMovementsByOperationAccountId(accountId,operationType);
+
+        switch(operationType.toUpperCase()) {
+            case "SUM":
+                return movementDao.findMovementsByOperationAccountId(accountId,OperationType.SUM);
+            case "REST":
+                return movementDao.findMovementsByOperationAccountId(accountId,OperationType.REST);
+            default:
+                return new ArrayList<>();
+        }
+
     }
 
     @Override
     public List<Movement> findMovementsByPaymentAccountId(Long accountId, String paymentType) {
-        return movementDao.findMovementsByPaymentAccountId(accountId,paymentType);
+        switch(paymentType.toUpperCase()) {
+            case "CARD":
+                return movementDao.findMovementsByPaymentAccountId(accountId,PaymentType.CARD);
+            case "ACCOUNT":
+                return movementDao.findMovementsByPaymentAccountId(accountId,PaymentType.ACCOUNT);
+            default:
+                return new ArrayList<>();
+        }
     }
 
     @Override
