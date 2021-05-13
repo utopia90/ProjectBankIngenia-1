@@ -32,9 +32,6 @@ public class MovementDaoImpl implements MovementDao {
     @Override
     public List<Movement> findMovementsInterval(LocalDate firstDay, LocalDate lastDay) {
       if (firstDay != null && lastDay != null) {
-          //Timestamp timestampstart = Timestamp.from(firstDay);
-          //Timestamp timestampfinish = Timestamp.from(lastDay);
-
           String sql="SELECT m FROM Movement m WHERE m.date BETWEEN '"+firstDay+"' AND '"+lastDay+"'";
           Query query = manager.createQuery(sql);
          return query.getResultList();
@@ -96,9 +93,6 @@ public class MovementDaoImpl implements MovementDao {
     public List<Movement> findMovementsIntervalByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay) {
         if (firstDay != null&&lastDay!=null) {
             String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE  a.id ="+accountId+" AND m.date BETWEEN '"+firstDay+"' AND '"+lastDay+"'";
-            System.out.println("************************");
-            System.out.println(sql);
-            System.out.println("************************");
             Query query = manager.createQuery(sql);
             return query.getResultList();
         }
