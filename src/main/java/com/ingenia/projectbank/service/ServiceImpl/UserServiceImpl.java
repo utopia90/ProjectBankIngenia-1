@@ -49,9 +49,6 @@ public class UserServiceImpl implements UserService {
             if(!passwordEncoder.matches(user.getPassword(),userbd.getPassword())){
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
             }
-            if(user.getEmail().equals(userbd.getEmail())){
-                return null;
-            }
            return repository.save(user);
         }
         return null;

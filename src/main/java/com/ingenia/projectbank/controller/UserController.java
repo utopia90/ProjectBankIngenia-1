@@ -120,8 +120,11 @@ public class UserController {
     @ApiOperation(value = "Borra un usuario por id")
     public ResponseEntity<Void> deleteOne(@ApiParam("Clave primaria del usuario")@PathVariable("id") Long id) {
         log.debug("Delete user");
-        userService.deleteOneUserById(id);
-        return ResponseEntity.noContent().build();
+        if(id!=null){
+            userService.deleteOneUserById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     /**
      * method Delete all User
@@ -132,7 +135,7 @@ public class UserController {
     public ResponseEntity<Void> deleteAll() {
         log.debug("DeleteAll");
         userService.deleteAllUsers();
-        return  ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
