@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 
 @SpringBootApplication
@@ -46,20 +47,20 @@ public class ProjectBankApplication implements CommandLineRunner {
 		Account account1 = new Account("es2452645435454",3000.0, 600.00);
 		Account account2 = new Account("es2452645435455",4000.0, 700.00);
 
-		Movement movement1=new Movement(OperationType.REST, PaymentType.ACCOUNT, Instant.now(),320.0,account1, CategoryType.UTILITIES);
-		Movement movement2=new Movement(OperationType.REST, PaymentType.CREDIT,Instant.parse("2018-11-30T18:35:24.00Z"),100.0,account1, CategoryType.CLOTHES);
-		Movement movement3=new Movement(OperationType.REST, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),20.0,account1, CategoryType.FUEL);
-		Movement movement4=new Movement(OperationType.REST, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),40.0,account1, CategoryType.RESTAURANTS);
-		Movement movement5=new Movement(OperationType.REST, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),400.0,account1, CategoryType.UTILITIES);
-		Movement movement6=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
-		Movement movement7=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
-		Movement movement8=new Movement(OperationType.REST, PaymentType.CREDIT,Instant.parse("2018-11-30T18:35:24.00Z"),300.0,account2, CategoryType.CLOTHES);
-		Movement movement9=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account2, CategoryType.PAID);
-		Movement movement10=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
-		Movement movement11=new Movement(OperationType.SUM, PaymentType.CREDIT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
-		Movement movement14=new Movement(OperationType.REST, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
-		Movement movement15=new Movement(OperationType.SUM, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
-		Movement movement16=new Movement(OperationType.SUM, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
+		Movement movement1=new Movement(OperationType.REST, PaymentType.ACCOUNT, Instant.now(),LocalDate.now(),320.0,account1, CategoryType.UTILITIES);
+		Movement movement2=new Movement(OperationType.REST, PaymentType.CREDIT,Instant.parse("2021-01-01T18:35:24.00Z"),LocalDate.parse("2021-01-01"),100.0,account1, CategoryType.CLOTHES);
+		Movement movement3=new Movement(OperationType.REST, PaymentType.DEBIT,Instant.parse("2021-01-10T18:35:24.00Z"),LocalDate.parse("2021-01-10"),20.0,account1, CategoryType.FUEL);
+		Movement movement4=new Movement(OperationType.REST, PaymentType.ACCOUNT,Instant.parse("2021-01-15T18:35:24.00Z"),LocalDate.parse("2021-01-15"),40.0,account1, CategoryType.RESTAURANTS);
+		Movement movement5=new Movement(OperationType.REST, PaymentType.DEBIT,Instant.parse("2021-01-20T18:35:24.00Z"),LocalDate.parse("2021-01-20"),400.0,account1, CategoryType.UTILITIES);
+		Movement movement6=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2021-02-01T18:35:24.00Z"),LocalDate.parse("2021-02-01"),1200.0,account1, CategoryType.PAID);
+		Movement movement7=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2021-02-10T18:35:24.00Z"),LocalDate.parse("2021-02-10"),1200.0,account1, CategoryType.PAID);
+		Movement movement8=new Movement(OperationType.REST, PaymentType.CREDIT,Instant.parse("2021-02-20T18:35:24.00Z"),LocalDate.parse("2021-02-20"),300.0,account2, CategoryType.CLOTHES);
+		Movement movement9=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2021-02-22T18:35:24.00Z"),LocalDate.parse("2021-02-22"),1200.0,account2, CategoryType.PAID);
+		Movement movement10=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2021-03-01T18:35:24.00Z"),LocalDate.parse("2021-03-01"),200.0,account2, CategoryType.PAID);
+		Movement movement11=new Movement(OperationType.SUM, PaymentType.CREDIT,Instant.parse("2021-03-05T18:35:24.00Z"),LocalDate.parse("2021-03-05"),200.0,account2, CategoryType.PAID);
+		Movement movement14=new Movement(OperationType.REST, PaymentType.DEBIT,Instant.parse("2021-04-01T18:35:24.00Z"),LocalDate.parse("2021-04-01"),200.0,account2, CategoryType.PAID);
+		Movement movement15=new Movement(OperationType.SUM, PaymentType.DEBIT,Instant.parse("2021-04-10T18:35:24.00Z"),LocalDate.parse("2021-04-10"),200.0,account2, CategoryType.PAID);
+		Movement movement16=new Movement(OperationType.SUM, PaymentType.DEBIT,Instant.parse("2021-04-15T18:35:24.00Z"),LocalDate.parse("2021-04-15"),200.0,account2, CategoryType.PAID);
 
 
 		User user1 = new User("Borja", "Díaz", "borja@diaz",encoder.encode("1234"));

@@ -115,7 +115,7 @@ public class BankCardController {
      */
     @PutMapping(value = "/bankcard")
     @ApiOperation(value = "modificar  tarjeta bancaria")
-    public ResponseEntity<BankCard> modifyCompany(@ApiParam("Objeto BankCard a modificar")@RequestBody BankCard bankCard){
+    public ResponseEntity<BankCard> modifyBankCard(@ApiParam("Objeto BankCard a modificar")@RequestBody BankCard bankCard){
         log.debug("Modify bankCard");
         BankCard resultado=null;
         if (bankCard.getId()==null) {

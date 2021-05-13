@@ -27,8 +27,11 @@ public class Movement {
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
+    @ApiModelProperty("Clave fecha tipo Instant")
+    private Instant timestamp;
+
     @ApiModelProperty("Clave fecha tipo Localdate")
-    private Instant date;
+    private LocalDate date;
 
     @ApiModelProperty("Clave cantidad tipo Double")
     private Double quantity;
@@ -53,16 +56,16 @@ public class Movement {
     public Movement() {
     }
 
-    public Movement(OperationType operationType, PaymentType paymentType, Instant date, Double quantity, Account account, CategoryType categoryType) {
+    public Movement(OperationType operationType, PaymentType paymentType, Instant timestamp, LocalDate date, Double quantity, Account account, CategoryType categoryType) {
         this.operationType = operationType;
         this.paymentType = paymentType;
+        this.timestamp = timestamp;
         this.date = date;
         this.quantity = quantity;
         this.account = account;
         this.categoryType = categoryType;
     }
 
-    //TODO---------------------------------------
     public double getRemainingBalance() {
         return remainingBalance;
     }
@@ -79,7 +82,6 @@ public class Movement {
         this.remainingBalance = reminingCreditBalance;
     }
 
-    //TODO---------------------------------------
     public Long getId() {
         return id;
     }
@@ -104,11 +106,19 @@ public class Movement {
         this.paymentType = paymentType;
     }
 
-    public Instant getDate() {
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Instant date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +46,7 @@ public class MovementServiceImpl  implements MovementService {
 
     @Override
     public Movement updateMovement(Movement movement) {
-        if(movement.getId()!=null)movementRepository.save(movement);
+        if(movement.getId()!=null)return movementRepository.save(movement);
         return null;
     }
 
@@ -60,7 +61,7 @@ public class MovementServiceImpl  implements MovementService {
     }
 
     @Override
-    public List<Movement> findMovementsInterval(Instant firstDay, Instant lastDay) {
+    public List<Movement> findMovementsInterval(LocalDate firstDay, LocalDate lastDay) {
         return movementDao.findMovementsInterval(firstDay,lastDay);
     }
 
@@ -109,7 +110,7 @@ public class MovementServiceImpl  implements MovementService {
     }
 
     @Override
-    public List<Movement> findMovementsIntervalByAccountId(Long accountId, Instant firstDay, Instant lastDay) {
+    public List<Movement> findMovementsIntervalByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay) {
         return movementDao.findMovementsIntervalByAccountId(accountId,firstDay,lastDay);
     }
 
