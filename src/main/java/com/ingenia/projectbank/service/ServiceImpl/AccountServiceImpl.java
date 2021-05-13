@@ -53,10 +53,11 @@ public class AccountServiceImpl  implements AccountService {
         repository.deleteAll();
     }
 
-   /* @Override
-    public Optional<Account> getAccountBalance(Account account, String balanceType) {
-        return Optional.empty();
-    }*/
+    @Override
+    public Double getAccountBalanceByTypeAndUser(User user, String balanceType) {
+        return this.accountDao.getAccountBalanceByTypeAndUser(user, balanceType);
+    }
+
 
     @Override
     public Double getCurrentBalanceByAccountId(Long id) {

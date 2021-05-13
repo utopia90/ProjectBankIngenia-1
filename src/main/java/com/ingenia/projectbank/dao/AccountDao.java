@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AccountDao {
-    /*getAccountBalance(Account account, String balanceType);*/
 
     Double getCurrentBalanceByAccountId(Long id);
 
     List<Account> findAccountsByUser(User user);
 
+    Double getAccountBalanceByTypeAndUser(User user, String balanceType);
 }

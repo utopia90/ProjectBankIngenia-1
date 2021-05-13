@@ -130,21 +130,21 @@ public class AccountController {
 
 
     /**
-     * method to get available Balance in card/account/global
+     * method to get available Balance in credit/account/debit/global by user
      * @param balanceType that can be card/account/global
      * @return
      */
-    /*@GetMapping(value = "/account-balance-{balanceType}")
-    @ApiOperation(value = "encuentra el balance según parámetros card/account/global")
-    public ResponseEntity<Account> getAccountBalance(@ApiParam("Objeto account donde queremos consultar balance")@RequestBody Account account, @ApiParam("Clave balanceType que queremos consultar")@PathVariable("balanceType") String balanceType){
+    @GetMapping(value = "/account-balancetype-{balanceType}")
+    @ApiOperation(value = "encuentra el balance según parámetro balanceType credit/account/debit/global según usuario")
+    public ResponseEntity<Double> getAccountBalanceByTypeAndUser(@ApiParam("Objeto User del que queremos consultar balance")@RequestBody User user, @ApiParam("Clave balanceType que queremos consultar")@PathVariable("balanceType") String balanceType){
         log.debug("getAccountBalance");
-        Optional<Account> accountOpt = accountService.getAccountBalance(account,balanceType);
-        if (accountOpt.isPresent())
-            return ResponseEntity.ok().body(accountOpt.get());
+        Double accountOpt = accountService.getAccountBalanceByTypeAndUser(user,balanceType);
+        if (accountOpt != null)
+            return ResponseEntity.ok().body(accountOpt);
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-}*/
+}
 
     /**
      * method return currentBalance for ID account
