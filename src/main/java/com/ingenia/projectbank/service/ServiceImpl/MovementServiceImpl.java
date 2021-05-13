@@ -64,17 +64,17 @@ public class MovementServiceImpl  implements MovementService {
     }
 
     @Override
-    public List<Movement> findMovementsByCategory(CategoryType categoryType) {
+    public List<Movement> findMovementsByCategory(String categoryType) {
         return movementDao.findMovementsByCategory(categoryType);
     }
 
     @Override
-    public List<Movement> findMovementsByOperation(OperationType operationType) {
+    public List<Movement> findMovementsByOperation(String operationType) {
         return movementDao.findMovementsByOperation(operationType);
     }
 
     @Override
-    public List<Movement> findMovementsByPayment(PaymentType paymentType) {
+    public List<Movement> findMovementsByPayment(String paymentType) {
         return movementDao.findMovementsByPayment(paymentType);
     }
 
@@ -84,17 +84,17 @@ public class MovementServiceImpl  implements MovementService {
     }
 
     @Override
-    public List<Movement> findMovementsByCategoryAccountId(Long accountId, CategoryType categoryType) {
+    public List<Movement> findMovementsByCategoryAccountId(Long accountId, String categoryType) {
         return movementDao.findMovementsByCategoryAccountId(accountId,categoryType);
     }
 
     @Override
-    public List<Movement> findMovementsByOperationAccountId(Long accountId, OperationType operationType) {
+    public List<Movement> findMovementsByOperationAccountId(Long accountId, String operationType) {
         return movementDao.findMovementsByOperationAccountId(accountId,operationType);
     }
 
     @Override
-    public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {
+    public List<Movement> findMovementsByPaymentAccountId(Long accountId, String paymentType) {
         return movementDao.findMovementsByPaymentAccountId(accountId,paymentType);
     }
 

@@ -38,9 +38,9 @@ public class MovementController {
     @ApiOperation(value = "encuentra todas las Movimientos ")
     public List<Movement> findAllMovements(@RequestParam(name = "startdate", required = false) String startdate,
                                            @RequestParam(name = "finishdate", required = false) String finishdate,
-                                           @RequestParam(name = "operation", required = false) OperationType operation,
-                                           @RequestParam(name = "category", required = false) CategoryType category,
-                                           @RequestParam(name = "payment", required = false) PaymentType payment){
+                                           @RequestParam(name = "operation", required = false) String operation,
+                                           @RequestParam(name = "category", required = false) String category,
+                                           @RequestParam(name = "payment", required = false) String payment){
         if(operation!=null){
             log.debug("Rest request for movements filter by operation");
             return movementService.findMovementsByOperation(operation);
@@ -62,9 +62,9 @@ public class MovementController {
     public List<Movement> findAllMovementsByAccountId(@PathVariable Long accountid,
                                                       @RequestParam(name = "startdate", required = false) String startdate,
                                                       @RequestParam(name = "finishdate", required = false) String finishdate,
-                                                      @RequestParam(name = "operation", required = false) OperationType operation,
-                                                      @RequestParam(name = "category", required = false) CategoryType category,
-                                                      @RequestParam(name = "payment", required = false) PaymentType payment){
+                                                      @RequestParam(name = "operation", required = false) String operation,
+                                                      @RequestParam(name = "category", required = false) String category,
+                                                      @RequestParam(name = "payment", required = false) String payment){
         if(operation!=null){
             log.debug("Rest request for movements for account ID filter by operation");
             return movementService.findMovementsByOperationAccountId(accountid,operation);

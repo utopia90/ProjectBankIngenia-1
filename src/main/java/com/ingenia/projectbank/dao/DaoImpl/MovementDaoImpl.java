@@ -40,13 +40,13 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByCategory(CategoryType categoryType) {
+    public List<Movement> findMovementsByCategory(String categoryType) {
         if(categoryType!=null) {
             CriteriaBuilder builder = manager.getCriteriaBuilder();
             CriteriaQuery<Movement> criteria = builder.createQuery(Movement.class);
             Root<Movement> root = criteria.from(Movement.class);
             criteria.select(root);
-            criteria.where(builder.equal(root.get("categoryType"),categoryType));
+            criteria.where(builder.equal(root.get("categoryType"),categoryType.toUpperCase()));
             Query query = manager.createQuery(criteria);
             manager.close();
             return query.getResultList();
@@ -56,13 +56,13 @@ public class MovementDaoImpl implements MovementDao {
 
 
     @Override
-    public List<Movement> findMovementsByOperation(OperationType operationType) {
+    public List<Movement> findMovementsByOperation(String operationType) {
         if(operationType!=null) {
             CriteriaBuilder builder = manager.getCriteriaBuilder();
             CriteriaQuery<Movement> criteria = builder.createQuery(Movement.class);
             Root<Movement> root = criteria.from(Movement.class);
             criteria.select(root);
-            criteria.where(builder.equal(root.get("operationType"),operationType));
+            criteria.where(builder.equal(root.get("operationType"),operationType.toUpperCase()));
             Query query = manager.createQuery(criteria);
             manager.close();
             return query.getResultList();
@@ -71,13 +71,13 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByPayment(PaymentType paymentType) {
+    public List<Movement> findMovementsByPayment(String paymentType) {
         if(paymentType!=null) {
             CriteriaBuilder builder = manager.getCriteriaBuilder();
             CriteriaQuery<Movement> criteria = builder.createQuery(Movement.class);
             Root<Movement> root = criteria.from(Movement.class);
             criteria.select(root);
-            criteria.where(builder.equal(root.get("paymentType"),paymentType));
+            criteria.where(builder.equal(root.get("paymentType"),paymentType.toUpperCase()));
             Query query = manager.createQuery(criteria);
             manager.close();
             return query.getResultList();
@@ -99,7 +99,7 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByCategoryAccountId(Long accountId, CategoryType categoryType) {
+    public List<Movement> findMovementsByCategoryAccountId(Long accountId, String categoryType) {
         //TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
         if (categoryType != null&&accountId!=null) {
             String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
@@ -108,7 +108,7 @@ public class MovementDaoImpl implements MovementDao {
             List<Movement> movementList = query.getResultList();
             List<Movement> movementListF =new ArrayList<>();
             for (int i = 0; i < movementList.size(); i++) {
-                if(movementList.get(i).getCategoryType().equals(categoryType.toString().toUpperCase())){
+                if(movementList.get(i).getCategoryType().equals(categoryType.toUpperCase())){
                     movementListF.add(movementList.get(i));
                 }
             }
@@ -119,7 +119,7 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByOperationAccountId(Long accountId, OperationType operationType) {
+    public List<Movement> findMovementsByOperationAccountId(Long accountId, String operationType) {
         //TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
         if (operationType != null&&accountId!=null) {
             String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
@@ -128,7 +128,7 @@ public class MovementDaoImpl implements MovementDao {
             List<Movement> movementList = query.getResultList();
             List<Movement> movementListF =new ArrayList<>();
             for (int i = 0; i < movementList.size(); i++) {
-                if(movementList.get(i).getOperationType().equals(operationType.toString().toUpperCase())){
+                if(movementList.get(i).getOperationType().equals(operationType.toUpperCase())){
                     movementListF.add(movementList.get(i));
                 }
             }
@@ -139,7 +139,7 @@ public class MovementDaoImpl implements MovementDao {
     }
 
     @Override
-    public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {
+    public List<Movement> findMovementsByPaymentAccountId(Long accountId, String paymentType) {
 //TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
         if (paymentType != null&&accountId!=null) {
             String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
@@ -147,8 +147,12 @@ public class MovementDaoImpl implements MovementDao {
             Query query = manager.createQuery(sql);
             List<Movement> movementList = query.getResultList();
             List<Movement> movementListF =new ArrayList<>();
+
+            System.out.println("------------------****************************************************************---------------");
+            System.out.println(paymentType.toString().toUpperCase());
+            System.out.println("------------------****************************************************************---------------");
             for (int i = 0; i < movementList.size(); i++) {
-                if(movementList.get(i).getPaymentType().equals(paymentType.toString().toUpperCase())){
+                if(movementList.get(i).getPaymentType().equals(paymentType.toUpperCase())){
                     movementListF.add(movementList.get(i));
                 }
             }
