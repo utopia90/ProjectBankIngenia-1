@@ -57,7 +57,7 @@ public class ProjectBankApplication implements CommandLineRunner {
 		Movement movement9=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account2, CategoryType.PAID);
 		Movement movement10=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
 		Movement movement11=new Movement(OperationType.SUM, PaymentType.CREDIT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
-		Movement movement12=new Movement(OperationType.SUM, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
+		Movement movement12=new Movement(OperationType.REST, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
 
 
 

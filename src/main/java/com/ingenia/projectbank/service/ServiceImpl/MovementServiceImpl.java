@@ -97,8 +97,8 @@ public class MovementServiceImpl  implements MovementService {
     @Override
     public List<Movement> findMovementsByPayment(String paymentType) {
         switch(paymentType.toUpperCase()) {
-            case "CARD":
-                return movementDao.findMovementsByPayment(PaymentType.CARD);
+            case "CREDIT":
+                return movementDao.findMovementsByPayment(PaymentType.CREDIT);
             case "ACCOUNT":
                 return movementDao.findMovementsByPayment(PaymentType.ACCOUNT);
             default:
@@ -146,8 +146,8 @@ public class MovementServiceImpl  implements MovementService {
     @Override
     public List<Movement> findMovementsByPaymentAccountId(Long accountId, String paymentType) {
         switch(paymentType.toUpperCase()) {
-            case "CARD":
-                return movementDao.findMovementsByPaymentAccountId(accountId,PaymentType.CARD);
+            case "CREDIT":
+                return movementDao.findMovementsByPaymentAccountId(accountId,PaymentType.CREDIT);
             case "ACCOUNT":
                 return movementDao.findMovementsByPaymentAccountId(accountId,PaymentType.ACCOUNT);
             default:
