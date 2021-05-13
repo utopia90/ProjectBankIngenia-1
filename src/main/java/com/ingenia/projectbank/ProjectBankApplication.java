@@ -43,18 +43,25 @@ public class ProjectBankApplication implements CommandLineRunner {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
-		Account account1 = new Account("es2452645435454",3000.0);
-		Account account2 = new Account("es2452645435455",4000.0);
+		Account account1 = new Account("es2452645435454",3000.0, 600.00);
+		Account account2 = new Account("es2452645435455",4000.0, 700.00);
 
 		Movement movement1=new Movement(OperationType.REST, PaymentType.ACCOUNT, Instant.now(),320.0,account1, CategoryType.UTILITIES);
-		Movement movement2=new Movement(OperationType.REST, PaymentType.CARD,Instant.parse("2018-11-30T18:35:24.00Z"),100.0,account1, CategoryType.CLOTHES);
-		Movement movement3=new Movement(OperationType.REST, PaymentType.CARD,Instant.parse("2018-11-30T18:35:24.00Z"),20.0,account1, CategoryType.FUEL);
+		Movement movement2=new Movement(OperationType.REST, PaymentType.CREDIT,Instant.parse("2018-11-30T18:35:24.00Z"),100.0,account1, CategoryType.CLOTHES);
+		Movement movement3=new Movement(OperationType.REST, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),20.0,account1, CategoryType.FUEL);
 		Movement movement4=new Movement(OperationType.REST, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),40.0,account1, CategoryType.RESTAURANTS);
-		Movement movement5=new Movement(OperationType.REST, PaymentType.CARD,Instant.parse("2018-11-30T18:35:24.00Z"),400.0,account1, CategoryType.UTILITIES);
+		Movement movement5=new Movement(OperationType.REST, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),400.0,account1, CategoryType.UTILITIES);
 		Movement movement6=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
 		Movement movement7=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
-		Movement movement8=new Movement(OperationType.REST, PaymentType.CARD,Instant.parse("2018-11-30T18:35:24.00Z"),300.0,account2, CategoryType.CLOTHES);
+		Movement movement8=new Movement(OperationType.REST, PaymentType.CREDIT,Instant.parse("2018-11-30T18:35:24.00Z"),300.0,account2, CategoryType.CLOTHES);
 		Movement movement9=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account2, CategoryType.PAID);
+		Movement movement10=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
+		Movement movement11=new Movement(OperationType.SUM, PaymentType.CREDIT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
+		Movement movement12=new Movement(OperationType.SUM, PaymentType.DEBIT,Instant.parse("2018-11-30T18:35:24.00Z"),200.0,account2, CategoryType.PAID);
+
+
+
+
 		User user1 = new User("Borja", "Díaz", "borja@diaz", encoder.encode("1234"));
 		User user2 = new User("Elena", "Fernández", "elena@fernandez", encoder.encode("1234"));
 		User salvi = new User("salvi", "Lopez", "salvilopezpruebas@gmail.com", encoder.encode("salvi"));
@@ -71,6 +78,12 @@ public class ProjectBankApplication implements CommandLineRunner {
 		account1.addMovimiento(movement5);
 		account1.addMovimiento(movement6);
 		account1.addMovimiento(movement7);
+		account2.addMovimiento(movement10);
+		account2.addMovimiento(movement11);
+		account2.addMovimiento(movement12);
+
+
+
 		movement1.setAccount(account1);
 		movement2.setAccount(account1);
 		movement3.setAccount(account1);
@@ -78,6 +91,9 @@ public class ProjectBankApplication implements CommandLineRunner {
 		movement5.setAccount(account1);
 		movement6.setAccount(account1);
 		movement7.setAccount(account1);
+        movement10.setAccount(account2);
+        movement11.setAccount(account2);
+		movement12.setAccount(account2);
 
 
 		user1.getAccounts().add(account1);

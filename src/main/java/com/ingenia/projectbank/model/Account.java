@@ -20,8 +20,14 @@ public class Account {
     @ApiModelProperty("Clave iban tipo String")
     private String iban;
 
-    @ApiModelProperty("Clave saldo actual tipo Double")
+    @ApiModelProperty("Clave saldo actual cuenta tipo Double")
     private Double currentBalance;
+
+    @ApiModelProperty("Clave saldo actual tarjeta crédito tipo Double")
+    private Double currentCreditCardBalance;
+
+    @ApiModelProperty("Clave saldo global tipo Double")
+    private Double currentGlobalBalance;
 
     @ApiModelProperty("Clave usuario tipo User")
     @ManyToMany(mappedBy="accounts", cascade = {CascadeType.PERSIST})
@@ -45,10 +51,12 @@ public class Account {
     public Account() {
     }
 
-    public Account(String iban, Double currentBalance) {
+    public Account(String iban, Double currentBalance, Double currentCreditCardBalance) {
         this.iban = iban;
         this.currentBalance = currentBalance;
+        this.currentCreditCardBalance = currentCreditCardBalance;
     }
+
     /**
      public HashMap getHistorialSaldo() {
      return historialSaldo;
@@ -105,15 +113,43 @@ public class Account {
         this.cards = cards;
     }
 
+    public Double getCurrentCreditCardBalance() {
+        return currentCreditCardBalance;
+    }
+
+    public void setCurrentCreditCardBalance(Double currentCreditCardBalance) {
+        this.currentCreditCardBalance = currentCreditCardBalance;
+    }
+
+    public Double getCurrentGlobalBalance() {
+        return this.currentGlobalBalance =  this.currentBalance + this.currentCreditCardBalance;
+    }
+
+    public void setCurrentGlobalBalance(Double currentGlobalBalance) {
+        this.currentGlobalBalance = currentGlobalBalance;
+    }
+
     public void addMovimiento(Movement movement){
-        if(movement.getOperationType()==OperationType.REST){
+        if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.ACCOUNT || movement.getPaymentType()== PaymentType.DEBIT){
             this.currentBalance=this.currentBalance-movement.getQuantity();
-        }else if(movement.getOperationType()==OperationType.SUM){
+            movement.setRemainingBalance(this.currentBalance);
+            this.getMovements().add(movement);
+        }else if(movement.getOperationType()==OperationType.SUM && movement.getPaymentType()== PaymentType.ACCOUNT || movement.getPaymentType()== PaymentType.DEBIT){
             this.currentBalance=this.currentBalance+movement.getQuantity();
+            movement.setRemainingBalance(this.currentBalance);
+            this.getMovements().add(movement);
         }
-        //this.historialSaldo.put(movement.getAccount(),this.currentBalance);
-        movement.setRemainingBalance(this.currentBalance);
-        this.getMovements().add(movement);
+
+        if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.CREDIT){
+            this.currentCreditCardBalance=this.currentCreditCardBalance-movement.getQuantity();
+            movement.setReminingCreditBalance(this.currentCreditCardBalance);
+            this.getMovements().add(movement);
+        }else if(movement.getOperationType()==OperationType.SUM && movement.getPaymentType()== PaymentType.CREDIT){
+            this.currentCreditCardBalance=this.currentCreditCardBalance+movement.getQuantity();
+            movement.setReminingCreditBalance(this.currentBalance);
+            this.getMovements().add(movement);
+        }
+
 
     }
 
