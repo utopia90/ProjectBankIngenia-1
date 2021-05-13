@@ -143,11 +143,11 @@ public class Account {
 
         if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.CREDIT){
             this.currentCreditCardBalance=this.currentCreditCardBalance-movement.getQuantity();
-            movement.setReminingCreditBalance(this.currentCreditCardBalance);
+            movement.setRemainingCreditBalance(this.currentCreditCardBalance);
             this.getMovements().add(movement);
         }else if(movement.getOperationType()==OperationType.SUM && movement.getPaymentType()== PaymentType.CREDIT){
             this.currentCreditCardBalance=this.currentCreditCardBalance+movement.getQuantity();
-            movement.setReminingCreditBalance(this.currentBalance);
+            movement.setRemainingCreditBalance(this.currentBalance);
             this.getMovements().add(movement);
         }
         if(movement.getOperationType()==OperationType.REST && movement.getPaymentType()== PaymentType.DEBIT){

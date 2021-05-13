@@ -2,6 +2,8 @@ package com.ingenia.projectbank.dao.DaoImpl;
 
 import com.ingenia.projectbank.dao.AccountDao;
 import com.ingenia.projectbank.model.Account;
+import com.ingenia.projectbank.model.BankCard;
+import com.ingenia.projectbank.model.Movement;
 import com.ingenia.projectbank.model.User;
 import org.hibernate.query.Query;
 import org.springframework.http.ResponseEntity;
@@ -78,4 +80,18 @@ public class AccountDaoImpl implements AccountDao {
       return null;
     }
 
+    @Override
+    public ResponseEntity<Void> deleteAccountById(Long id) {
+
+        Account account = manager.find(Account.class, id);
+        Query queryNative = (Query) manager.createNativeQuery("delete from users_accounts where accounts_id ="+id);
+
+        if (account != null) {
+                queryNative.executeUpdate();
+                manager.remove(account);
+                manager.flush();
+            }
+
+        return ResponseEntity.notFound().build();
+    }
 }

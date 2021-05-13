@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -121,8 +122,10 @@ public class AccountController {
      * @param id
      * @return no content
      */
+
     @DeleteMapping(value = "/account/{id}")
     @ApiOperation(value = "Borra una  cuenta bancaria por id")
+    @Transactional
     public ResponseEntity<Void> deleteOne(@ApiParam("Clave primaria de la account") @PathVariable("id") Long id) {
         log.debug("Delete account");
         accountService.deleteOneAccountById(id);

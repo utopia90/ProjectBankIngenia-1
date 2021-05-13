@@ -41,7 +41,7 @@ public class Movement {
     //TODO---------------------------------------
     //@Column(name = "remaining-balance")
     private double remainingBalance;
-    private double reminingCreditBalance;
+    private double remainingCreditBalance;
 
 
     //TODO---------------------------------------
@@ -71,12 +71,12 @@ public class Movement {
         this.remainingBalance = remainingBalance;
     }
 
-    public double getReminingCreditBalance() {
-        return reminingCreditBalance;
+    public double getRemainingCreditBalance() {
+        return remainingCreditBalance;
     }
 
-    public void setReminingCreditBalance(double reminingCreditBalance) {
-        this.reminingCreditBalance = reminingCreditBalance;
+    public void setRemainingCreditBalance(double reminingCreditBalance) {
+        this.remainingBalance = reminingCreditBalance;
     }
 
     //TODO---------------------------------------
@@ -135,5 +135,6 @@ public class Movement {
     public void setCategoryType(CategoryType categoryType) {
         this.categoryType = categoryType;
     }
+
 
 }

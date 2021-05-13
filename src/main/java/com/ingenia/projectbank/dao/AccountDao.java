@@ -15,4 +15,6 @@ public interface AccountDao {
     List<Account> findAccountsByUser(User user);
 
     Double getAccountBalanceByTypeAndUser(User user, String balanceType);
+
+    ResponseEntity<Void> deleteAccountById(Long id);
 }

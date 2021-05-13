@@ -15,7 +15,7 @@ public interface AccountService {
 
     Account updateAccount(Account account);
 
-    void deleteOneAccountById(Long id);
+    ResponseEntity<Void> deleteOneAccountById(Long id);
 
     void deleteAllAccounts();
 
