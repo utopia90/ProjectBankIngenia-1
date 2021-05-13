@@ -25,6 +25,7 @@ public class Account {
 
     @ApiModelProperty("Clave usuario tipo User")
     @ManyToMany(mappedBy="accounts", cascade = {CascadeType.PERSIST})
+    @JsonIgnoreProperties("account")
     private List<User> users = new ArrayList<>();
 
 

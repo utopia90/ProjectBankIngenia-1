@@ -54,7 +54,7 @@ public class MovementController {
             log.debug("Rest request Movements filter by initDate and finisDate ");
             return movementService.findMovementsInterval( Instant.parse(startDate), Instant.parse(finishDate));
         }
-        log.debug("Rest request for Date  Movements");
+        log.debug("Rest request Movements ");
         return movementService.findAllMovements();
     }
     @GetMapping("/movementsaccount/{accountId}")
@@ -66,19 +66,19 @@ public class MovementController {
                                                       @RequestParam(name = "category", required = false) CategoryType category,
                                                       @RequestParam(name = "payment", required = false) PaymentType payment){
         if(operation!=null){
-            log.debug("Rest request for movements filter by operation");
+            log.debug("Rest request for movements for account ID filter by operation");
             return movementService.findMovementsByOperationAccountId(accountId,operation);
         }else if(category!=null){
-            log.debug("Rest request for movements filter by category");
+            log.debug("Rest request for movements for account IDfilter by category");
             return movementService.findMovementsByCategoryAccountId(accountId,category);
         }else if(payment!=null){
-            log.debug("Rest request for movements filter by Payment");
+            log.debug("Rest request for movements for account IDfilter by Payment");
             return movementService.findMovementsByPaymentAccountId(accountId,payment);
         } else if(startDate!=null&&finishDate!=null){
-            log.debug("Rest request Movements filter by initDate and finisDate ");
+            log.debug("Rest request Movements for account ID filter by initDate and finisDate ");
             return movementService.findMovementsIntervalByAccountId(accountId, Instant.parse(startDate), Instant.parse(finishDate));
         }
-        log.debug("Rest request for Date  Movements");
+        log.debug("Rest request Movements for account ID ");
         return movementService.findMovementsAllAccountId(accountId);
     }
 

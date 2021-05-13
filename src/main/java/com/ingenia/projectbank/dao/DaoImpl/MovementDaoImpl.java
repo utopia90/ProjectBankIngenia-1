@@ -95,7 +95,7 @@ public class MovementDaoImpl implements MovementDao {
     @Override
     public List<Movement> findMovementsByCategoryAccountId(Long accountId, CategoryType categoryType) {
         if (categoryType != null&&accountId!=null) {
-            Query query = manager.createQuery("select m FROM Movement m where  m.categoryType="+categoryType+" AND m.account.id ="+accountId );
+            Query query = manager.createQuery("select m FROM Movement m where   m.account.id ="+accountId +" AND m.categoryType="+categoryType);
             return query.getResultList();
         }
         return new ArrayList<>();
@@ -104,7 +104,7 @@ public class MovementDaoImpl implements MovementDao {
     @Override
     public List<Movement> findMovementsByOperationAccountId(Long accountId, OperationType operationType) {
         if (operationType != null&&accountId!=null) {
-            Query query = manager.createQuery("select m FROM Movement m where  m.operationType="+operationType+" AND m.account.id ="+accountId );
+            Query query = manager.createQuery("select m FROM Movement m where   m.account.id ="+accountId +" AND m.operationType="+operationType);
             return query.getResultList();
         }
         return new ArrayList<>();
@@ -113,7 +113,7 @@ public class MovementDaoImpl implements MovementDao {
     @Override
     public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {
         if (paymentType != null&&accountId!=null) {
-            Query query = manager.createQuery("select m FROM Movement m where  m.paymentType="+paymentType+" AND m.account.id ="+accountId );
+            Query query = manager.createQuery("select m FROM Movement m where   m.account.id ="+accountId +" AND m.paymentType="+paymentType);
             return query.getResultList();
         }
         return new ArrayList<>();

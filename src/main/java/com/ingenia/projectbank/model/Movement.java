@@ -36,6 +36,7 @@ public class Movement {
     @ManyToOne()
     @ApiModelProperty("Clave cuenta tipo Account")
     @JoinColumn(name = "id_account")
+    @JsonIgnoreProperties("movements")
     private Account account;
     //TODO---------------------------------------
     //@Column(name = "remaining-balance")
