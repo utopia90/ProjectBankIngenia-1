@@ -86,6 +86,9 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         resultado=userService.createUser(user);
+
+        if(resultado==null)return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         return  ResponseEntity.created(new URI("/api/user/"+resultado.getId())).body(resultado);
     }
 
@@ -96,7 +99,7 @@ public class UserController {
      */
     @PutMapping(value = "/user")
     @ApiOperation(value = "modificar usuario")
-    public ResponseEntity<User> modifyUser(@ApiParam("Objeto User a modificar")@RequestBody User user){
+    public ResponseEntity<User> modifyUser(@ApiParam("Objeto User a modificar")@RequestBody User user) throws URISyntaxException{
         log.debug("Modify user");
         User resultado=null;
         if (user.getId()==null) {
@@ -104,7 +107,9 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         resultado = userService.updateUser(user);
-        return ResponseEntity.ok().body(resultado);
+        if(resultado==null)return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       return ResponseEntity.ok().body(resultado);
+
     }
     /**
      *method Delete One  BankCard

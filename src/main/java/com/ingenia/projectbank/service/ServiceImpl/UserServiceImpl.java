@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        if(repository.existsUserByEmail(user.getEmail())){
+        if(repository.existsByEmail(user.getEmail())){
             return null;
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -43,7 +43,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
-        if(user.getId()!=null)repository.save(user);
+        if(user.getId()!=null){
+            Optional<User> userOpt= repository.findById(user.getId());
+            User userbd=userOpt.get();
+            if(!passwordEncoder.matches(user.getPassword(),userbd.getPassword())){
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
+            if(user.getEmail().equals(userbd.getEmail())){
+                return null;
+            }
+           return repository.save(user);
+        }
         return null;
     }
 
@@ -59,14 +69,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByEmail(String email) {
-        if (repository.existsUserByEmail(email)) {
+        if (repository.existsByEmail(email)) {
            return repository.findUserByEmail(email);
         }
         return null;
     }
     @Override
     public User findByEmailAndPassword(String email, String password) {
-        if (repository.existsUserByEmail(email)) {
+        if (repository.existsByEmail(email)) {
             User user=repository.findUserByEmail(email);
             if(passwordEncoder.matches(password,user.getPassword())){
                 return repository.findByEmailAndPassword(email,password);
@@ -77,7 +87,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean existsByEmailAndPassword(String email, String password) {
-        if(repository.existsUserByEmail(email)){
+        if(repository.existsByEmail(email)){
             User user=repository.findUserByEmail(email);
             return passwordEncoder.matches(password,user.getPassword());
         }
