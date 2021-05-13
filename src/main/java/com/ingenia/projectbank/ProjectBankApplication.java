@@ -53,7 +53,7 @@ public class ProjectBankApplication implements CommandLineRunner {
 		Movement movement5=new Movement(OperationType.REST, PaymentType.CARD,Instant.parse("2018-11-30T18:35:24.00Z"),400.0,account1, CategoryType.UTILITIES);
 		Movement movement6=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
 		Movement movement7=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account1, CategoryType.PAID);
-		Movement movement8=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account2, CategoryType.PAID);
+		Movement movement8=new Movement(OperationType.REST, PaymentType.CARD,Instant.parse("2018-11-30T18:35:24.00Z"),300.0,account2, CategoryType.CLOTHES);
 		Movement movement9=new Movement(OperationType.SUM, PaymentType.ACCOUNT,Instant.parse("2018-11-30T18:35:24.00Z"),1200.0,account2, CategoryType.PAID);
 		User user1 = new User("Borja", "Díaz", "borja@diaz", encoder.encode("1234"));
 		User user2 = new User("Elena", "Fernández", "elena@fernandez", encoder.encode("1234"));

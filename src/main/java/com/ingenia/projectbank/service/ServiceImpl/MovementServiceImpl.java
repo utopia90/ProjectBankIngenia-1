@@ -80,22 +80,22 @@ public class MovementServiceImpl  implements MovementService {
 
     @Override
     public List<Movement> findMovementsIntervalByAccountId(Long accountId, Instant firstDay, Instant lastDay) {
-        return null;
+        return movementDao.findMovementsIntervalByAccountId(accountId,firstDay,lastDay);
     }
 
     @Override
     public List<Movement> findMovementsByCategoryAccountId(Long accountId, CategoryType categoryType) {
-        return null;
+        return movementDao.findMovementsByCategoryAccountId(accountId,categoryType);
     }
 
     @Override
     public List<Movement> findMovementsByOperationAccountId(Long accountId, OperationType operationType) {
-        return null;
+        return movementDao.findMovementsByOperationAccountId(accountId,operationType);
     }
 
     @Override
     public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {
-        return null;
+        return movementDao.findMovementsByPaymentAccountId(accountId,paymentType);
     }
 
     @Override

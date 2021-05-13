@@ -36,8 +36,8 @@ public class MovementController {
      */
     @GetMapping("/movements")
     @ApiOperation(value = "encuentra todas las Movimientos ")
-    public List<Movement> findAllMovements(@RequestParam(name = "firstDate", required = false) String startDate,
-                                           @RequestParam(name = "finishDate", required = false) String finishDate,
+    public List<Movement> findAllMovements(@RequestParam(name = "startdate", required = false) String startdate,
+                                           @RequestParam(name = "finishdate", required = false) String finishdate,
                                            @RequestParam(name = "operation", required = false) OperationType operation,
                                            @RequestParam(name = "category", required = false) CategoryType category,
                                            @RequestParam(name = "payment", required = false) PaymentType payment){
@@ -50,36 +50,36 @@ public class MovementController {
         }else if(payment!=null){
             log.debug("Rest request for movements filter by Payment");
             return movementService.findMovementsByPayment(payment);
-        } else if(startDate!=null&&finishDate!=null){
+        } else if(startdate!=null&&finishdate!=null){
             log.debug("Rest request Movements filter by initDate and finisDate ");
-            return movementService.findMovementsInterval( Instant.parse(startDate), Instant.parse(finishDate));
+            return movementService.findMovementsInterval( Instant.parse(startdate), Instant.parse(finishdate));
         }
         log.debug("Rest request Movements ");
         return movementService.findAllMovements();
     }
-    @GetMapping("/movementsaccount/{accountId}")
+    @GetMapping("/movementsaccount/{accountid}")
     @ApiOperation(value = "encuentra todas las Movimientos ")
-    public List<Movement> findAllMovementsByAccountId(@PathVariable Long accountId,
-                                                      @RequestParam(name = "firstDate", required = false) String startDate,
-                                                      @RequestParam(name = "finishDate", required = false) String finishDate,
+    public List<Movement> findAllMovementsByAccountId(@PathVariable Long accountid,
+                                                      @RequestParam(name = "startdate", required = false) String startdate,
+                                                      @RequestParam(name = "finishdate", required = false) String finishdate,
                                                       @RequestParam(name = "operation", required = false) OperationType operation,
                                                       @RequestParam(name = "category", required = false) CategoryType category,
                                                       @RequestParam(name = "payment", required = false) PaymentType payment){
         if(operation!=null){
             log.debug("Rest request for movements for account ID filter by operation");
-            return movementService.findMovementsByOperationAccountId(accountId,operation);
+            return movementService.findMovementsByOperationAccountId(accountid,operation);
         }else if(category!=null){
             log.debug("Rest request for movements for account IDfilter by category");
-            return movementService.findMovementsByCategoryAccountId(accountId,category);
+            return movementService.findMovementsByCategoryAccountId(accountid,category);
         }else if(payment!=null){
             log.debug("Rest request for movements for account IDfilter by Payment");
-            return movementService.findMovementsByPaymentAccountId(accountId,payment);
-        } else if(startDate!=null&&finishDate!=null){
+            return movementService.findMovementsByPaymentAccountId(accountid,payment);
+        } else if(startdate!=null&&finishdate!=null){
             log.debug("Rest request Movements for account ID filter by initDate and finisDate ");
-            return movementService.findMovementsIntervalByAccountId(accountId, Instant.parse(startDate), Instant.parse(finishDate));
+            return movementService.findMovementsIntervalByAccountId(accountid, Instant.parse(startdate), Instant.parse(finishdate));
         }
         log.debug("Rest request Movements for account ID ");
-        return movementService.findMovementsAllAccountId(accountId);
+        return movementService.findMovementsAllAccountId(accountid);
     }
 
 

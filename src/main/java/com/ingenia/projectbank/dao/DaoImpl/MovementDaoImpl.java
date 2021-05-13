@@ -20,6 +20,8 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
+
 @Repository
 public class MovementDaoImpl implements MovementDao {
 
@@ -83,6 +85,10 @@ public class MovementDaoImpl implements MovementDao {
         return new ArrayList<>();
     }
 
+
+
+
+
     @Override
     public List<Movement> findMovementsIntervalByAccountId(Long accountId, Instant firstDay, Instant lastDay) {
         if (firstDay != null&&lastDay!=null) {
@@ -94,27 +100,60 @@ public class MovementDaoImpl implements MovementDao {
 
     @Override
     public List<Movement> findMovementsByCategoryAccountId(Long accountId, CategoryType categoryType) {
+        //TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
         if (categoryType != null&&accountId!=null) {
-            Query query = manager.createQuery("select m FROM Movement m where   m.account.id ="+accountId +" AND m.categoryType="+categoryType);
-            return query.getResultList();
+            String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
+            //String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a. WHERE m.paymentType ="+paymentType.toString().toLowerCase()+" AND   a.id ="+accountId;
+            Query query = manager.createQuery(sql);
+            List<Movement> movementList = query.getResultList();
+            List<Movement> movementListF =new ArrayList<>();
+            for (int i = 0; i < movementList.size(); i++) {
+                if(movementList.get(i).getCategoryType().equals(categoryType)){
+                    movementListF.add(movementList.get(i));
+                }
+            }
+            return movementListF;
+            //return query.getResultList();
         }
         return new ArrayList<>();
     }
 
     @Override
     public List<Movement> findMovementsByOperationAccountId(Long accountId, OperationType operationType) {
+        //TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
         if (operationType != null&&accountId!=null) {
-            Query query = manager.createQuery("select m FROM Movement m where   m.account.id ="+accountId +" AND m.operationType="+operationType);
-            return query.getResultList();
+            String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
+            //String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a. WHERE m.paymentType ="+paymentType.toString().toLowerCase()+" AND   a.id ="+accountId;
+            Query query = manager.createQuery(sql);
+            List<Movement> movementList = query.getResultList();
+            List<Movement> movementListF =new ArrayList<>();
+            for (int i = 0; i < movementList.size(); i++) {
+                if(movementList.get(i).getOperationType().equals(operationType)){
+                    movementListF.add(movementList.get(i));
+                }
+            }
+            return movementListF;
+            //return query.getResultList();
         }
         return new ArrayList<>();
     }
 
     @Override
     public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {
+//TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
         if (paymentType != null&&accountId!=null) {
-            Query query = manager.createQuery("select m FROM Movement m where   m.account.id ="+accountId +" AND m.paymentType="+paymentType);
-            return query.getResultList();
+            String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
+            //String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a. WHERE m.paymentType ="+paymentType.toString().toLowerCase()+" AND   a.id ="+accountId;
+            Query query = manager.createQuery(sql);
+            List<Movement> movementList = query.getResultList();
+            List<Movement> movementListF =new ArrayList<>();
+            for (int i = 0; i < movementList.size(); i++) {
+                if(movementList.get(i).getPaymentType().equals(paymentType)){
+                    movementListF.add(movementList.get(i));
+                }
+            }
+            return movementListF;
+            //return query.getResultList();
         }
         return new ArrayList<>();
     }
