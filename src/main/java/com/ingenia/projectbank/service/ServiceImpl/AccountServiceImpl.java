@@ -63,8 +63,8 @@ public class AccountServiceImpl  implements AccountService {
     }
 
     @Override
-    public void deleteAllAccounts() {
-        repository.deleteAll();
+    public ResponseEntity<Void> deleteAllAccounts() {
+      return this.accountDao.deleteAllAccounts();
     }
 
     @Override

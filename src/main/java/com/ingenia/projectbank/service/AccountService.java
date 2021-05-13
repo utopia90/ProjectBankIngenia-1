@@ -17,7 +17,7 @@ public interface AccountService {
 
     ResponseEntity<Void> deleteOneAccountById(Long id);
 
-    void deleteAllAccounts();
+    ResponseEntity<Void> deleteAllAccounts();
 
     Double getAccountBalanceByTypeAndUser(User user, String balanceType);
 

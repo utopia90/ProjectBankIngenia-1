@@ -94,4 +94,17 @@ public class AccountDaoImpl implements AccountDao {
 
         return ResponseEntity.notFound().build();
     }
+
+    @Override
+    public ResponseEntity<Void>  deleteAllAccounts() {
+        Query queryNative1 = (Query) manager.createNativeQuery("DELETE * from users_accounts");
+        Query queryNative2 = (Query) manager.createNativeQuery("DELETE * from Account");
+
+        queryNative1.executeUpdate();
+        queryNative2.executeUpdate();
+
+        return ResponseEntity.noContent().build();
+
+    }
+
 }

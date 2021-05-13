@@ -138,7 +138,8 @@ public class AccountController {
      * @return no content
      */
     @ApiOperation(value = "Borra todas las cuentas")
-    @DeleteMapping(value = "/account")
+    @DeleteMapping(value = "/accounts")
+    @Transactional
     public ResponseEntity<Void> deleteAllAccounts() {
         log.debug("DeleteAll");
         accountService.deleteAllAccounts();
