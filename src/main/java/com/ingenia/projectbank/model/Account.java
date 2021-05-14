@@ -47,7 +47,6 @@ public class Account {
     private List<BankCard> cards = new ArrayList<>();
 
 
-    //private HashMap historialSaldo = new HashMap();
 
     public Account() {
     }
