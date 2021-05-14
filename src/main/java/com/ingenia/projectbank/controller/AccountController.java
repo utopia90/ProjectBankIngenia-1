@@ -185,7 +185,7 @@ public class AccountController {
     }
 
     /**
-     * method return currentBalance for ID account
+     * method return account by user
      *
      * @param user
      *
