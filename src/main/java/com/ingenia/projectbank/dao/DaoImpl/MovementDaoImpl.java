@@ -134,10 +134,41 @@ public class MovementDaoImpl implements MovementDao {
                 }
             }
             return movementListF;
+
             //return query.getResultList();
         }
         return new ArrayList<>();
     }
+
+    @Override
+    public List<Movement> findMovementsByOperationAndCategoryAccountId(Long accountId, OperationType operationType, CategoryType categoryType) {
+        //TODO-------------------------- ESTA PENDIENTE BUSCAR UN SQL QUE FUNCIONE PARA REFACTORIZARLO MEJOR
+        if (operationType != null&&accountId!=null&&categoryType!=null) {
+            String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a.id WHERE a.id ="+accountId;
+            //String sql="SELECT m FROM Movement m JOIN Account a on m.account.id = a. WHERE m.paymentType ="+paymentType.toString().toLowerCase()+" AND   a.id ="+accountId;
+            Query query = manager.createQuery(sql);
+            List<Movement> movementList = query.getResultList();
+            List<Movement> movementListF =new ArrayList<>();
+            for (int i = 0; i < movementList.size(); i++) {
+                if(movementList.get(i).getOperationType().equals(operationType)){
+                    movementListF.add(movementList.get(i));
+                }
+            }
+
+            List<Movement> resultado =new ArrayList<>();
+            for (int i = 0; i < movementListF.size(); i++) {
+                if(movementListF.get(i).getCategoryType().equals(categoryType)){
+                    resultado.add(movementListF.get(i));
+                }
+            }
+            return resultado;
+
+
+            //return query.getResultList();
+        }
+        return new ArrayList<>();
+    }
+
 
     @Override
     public List<Movement> findMovementsByPaymentAccountId(Long accountId, PaymentType paymentType) {

@@ -69,9 +69,11 @@ public class MovementController {
                                                       @RequestParam(name = "operation", required = false) String operation,
                                                       @RequestParam(name = "category", required = false) String category,
                                                       @RequestParam(name = "payment", required = false) String payment){
-        if(operation!=null){
+        if(operation!=null&&category!=null){
+            log.debug("Rest request for movements for account ID filter by operation and category");
+            return movementService.findMovementsByOperationAndCategoryAccountId(accountid,operation,category);
+        }else if(operation!=null){
             log.debug("Rest request for movements for account ID filter by operation");
-
             return movementService.findMovementsByOperationAccountId(accountid,operation);
         }else if(category!=null){
             log.debug("Rest request for movements for account IDfilter by category");

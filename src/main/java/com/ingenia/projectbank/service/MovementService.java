@@ -32,5 +32,5 @@ public interface MovementService {
     List<Movement> findMovementsByOperationAccountId(Long accountId,String operationType);
     List<Movement> findMovementsByPaymentAccountId(Long accountId,String paymentType);
     List<Movement> findMovementsAllAccountId(Long accountId);
-
+    List<Movement> findMovementsByOperationAndCategoryAccountId(Long accountId,String operationType,String categoryType);
 }
