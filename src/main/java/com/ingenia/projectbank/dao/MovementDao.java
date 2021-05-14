@@ -20,6 +20,7 @@ public interface MovementDao {
     List<Movement> findMovementsIntervalByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay);
     List<Movement> findMovementsByCategoryAccountId(Long accountId,CategoryType categoryType);
     List<Movement> findMovementsByOperationAccountId(Long accountId,OperationType operationType);
+    List<Movement> findMovementsByOperationAndCategoryAccountId(Long accountId,OperationType operationType,CategoryType categoryType);
     List<Movement> findMovementsByPaymentAccountId(Long accountId,PaymentType paymentType);
     List<Movement> findMovementsAllAccountId(Long accountId);
 }

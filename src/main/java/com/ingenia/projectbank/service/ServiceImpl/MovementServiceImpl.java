@@ -109,6 +109,7 @@ public class MovementServiceImpl  implements MovementService {
         }
     }
 
+
     @Override
     public List<Movement> findMovementsIntervalByAccountId(Long accountId, LocalDate firstDay, LocalDate lastDay) {
         return movementDao.findMovementsIntervalByAccountId(accountId,firstDay,lastDay);
@@ -163,5 +164,63 @@ public class MovementServiceImpl  implements MovementService {
     @Override
     public List<Movement> findMovementsAllAccountId(Long accountId) {
         return movementDao.findMovementsAllAccountId(accountId);
+    }
+
+    @Override
+    public List<Movement> findMovementsByOperationAndCategoryAccountId(Long accountId, String operationType, String categoryType) {
+        switch(categoryType.toUpperCase()) {
+            case "RESTAURANTS":
+                switch(operationType.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.SUM,CategoryType.RESTAURANTS);
+                    case "REST":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.REST,CategoryType.RESTAURANTS);
+                    default:
+                        return new ArrayList<>();
+                }
+            case "FUEL":
+
+                switch(operationType.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.SUM,CategoryType.FUEL);
+                    case "REST":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.REST,CategoryType.FUEL);
+                    default:
+                        return new ArrayList<>();
+                }
+
+            case "CLOTHES":
+                switch(operationType.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.SUM,CategoryType.CLOTHES);
+                    case "REST":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.REST,CategoryType.CLOTHES);
+                    default:
+                        return new ArrayList<>();
+                }
+
+            case "UTILITIES":
+                switch(operationType.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.SUM,CategoryType.UTILITIES);
+                    case "REST":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.REST,CategoryType.UTILITIES);
+                    default:
+                        return new ArrayList<>();
+                }
+            case "PAID":
+                switch(operationType.toUpperCase()) {
+                    case "SUM":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.SUM,CategoryType.PAID);
+                    case "REST":
+                        return movementDao.findMovementsByOperationAndCategoryAccountId(accountId,OperationType.REST,CategoryType.PAID);
+                    default:
+                        return new ArrayList<>();
+                }
+
+            default:
+                return new ArrayList<>();
+        }
+
     }
 }
