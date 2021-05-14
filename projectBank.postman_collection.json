@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0a83b647-d215-4fa6-9292-77b2a07b1292",
+		"_postman_id": "8132df98-4fd1-4c85-8c7c-7d89bbc91af2",
 		"name": "projectBank",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -919,6 +919,72 @@
 					"response": []
 				},
 				{
+					"name": "getAccountByUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://projectbankingenia.herokuapp.com/api/account-user",
+							"protocol": "https",
+							"host": [
+								"projectbankingenia",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"account-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTotalBalanceByBalanceTypeAndUser Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://projectbankingenia.herokuapp.com/api/account-balancetype-global",
+							"protocol": "https",
+							"host": [
+								"projectbankingenia",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"account-balancetype-global"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "creatAccount",
 					"request": {
 						"method": "POST",
@@ -1036,6 +1102,15 @@
 								"accounts"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				}

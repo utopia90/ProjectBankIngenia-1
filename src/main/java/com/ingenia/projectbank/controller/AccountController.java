@@ -64,7 +64,7 @@ public class AccountController {
     }
 
     @GetMapping("/accountbyiban/{iban}")
-    @ApiOperation(value = "encuentra una Cuenta Bancaria por su id")
+    @ApiOperation(value = "encuentra una Cuenta Bancaria por su iban")
     public ResponseEntity<Account> findOneAccount(@ApiParam("Clave primaria de la Cuenta Bancaria") @PathVariable String iban) {
         log.debug("Rest request an Account with iban: " + iban);
         Optional<Account> accountOpt = accountService.findAccountByIban(iban);
@@ -129,7 +129,7 @@ public class AccountController {
     public ResponseEntity<Void> deleteOne(@ApiParam("Clave primaria de la account") @PathVariable("id") Long id) {
         log.debug("Delete account");
         accountService.deleteOneAccountById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -143,7 +143,7 @@ public class AccountController {
     public ResponseEntity<Void> deleteAllAccounts() {
         log.debug("DeleteAll");
         accountService.deleteAllAccounts();
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
@@ -185,7 +185,7 @@ public class AccountController {
     }
 
     /**
-     * method return currentBalance for ID account
+     * method return account by user
      *
      * @param user
      *
