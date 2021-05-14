@@ -617,7 +617,7 @@
 					"response": []
 				},
 				{
-					"name": "getBankcardsByEmail",
+					"name": "getBankcardsById",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -638,7 +638,7 @@
 					"response": []
 				},
 				{
-					"name": "getbankcardByuserporid",
+					"name": "getbankcardByuser",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -784,6 +784,35 @@
 								"api",
 								"bankcard",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAllBankcards",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/bankcards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"bankcards"
 							]
 						}
 					},
@@ -1037,10 +1066,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Movement",
-			"item": []
 		},
 		{
 			"name": "get movements by  movements account id",
