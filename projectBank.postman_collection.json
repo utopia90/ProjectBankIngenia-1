@@ -985,6 +985,28 @@
 					"response": []
 				},
 				{
+					"name": "getAccountBalanceById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://projectbankingenia.herokuapp.com/api/account-balance/1",
+							"protocol": "https",
+							"host": [
+								"projectbankingenia",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"account-balance",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "creatAccount",
 					"request": {
 						"method": "POST",
@@ -1102,15 +1124,6 @@
 								"accounts"
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": null
 					},
 					"response": []
 				}
